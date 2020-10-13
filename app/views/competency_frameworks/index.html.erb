@@ -1,0 +1,5 @@
+<%= render partial: "search", locals: { query: params.dig(:search, :query) } %>
+
+<div class="mt-3">
+  <%= render partial: "results", locals: { results: @competency_frameworks } %>
+</div>

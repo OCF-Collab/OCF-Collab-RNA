@@ -1,0 +1,8 @@
+<h5>Displaying <%= results.count %> results</h5>
+<div class="mt-1 bg-white rounded shadow-sm">
+  <ul class="list-unstyled">
+    <% results.each do |result| %>
+      <%= render partial: "result", locals: { result: result } %>
+    <% end %>
+  </ul>
+</div>

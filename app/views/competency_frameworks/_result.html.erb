@@ -1,0 +1,9 @@
+<li class="media p-3 border-bottom">
+  <div class="media-body">
+    <h6><%= result[:name] %></h6>
+    <div class="media-body text-muted small">
+      <%= result[:description] %>
+    </div>
+  </div>
+  <%= image_tag result[:providerLogoUrl], class: "ml-3 align-self-center", width: 100, alt: result[:attributionName] %>
+</li>
