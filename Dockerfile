@@ -24,6 +24,8 @@ RUN yarn install
 
 COPY . $APP_PATH
 
+RUN bundle exec rake assets:precompile
+
 # Add a script to be executed every time the container starts.
 COPY docker-entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/docker-entrypoint.sh
