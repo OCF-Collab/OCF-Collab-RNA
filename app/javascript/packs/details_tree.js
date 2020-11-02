@@ -27,8 +27,10 @@ class DetailsTree {
             toggleElement.addEventListener("click", this.handleCollapseToggleClick);
         });
 
-        this.expandAllToggler().addEventListener("click", this.handleExpandAllClick);
-        this.collapseAllToggler().addEventListener("click", this.handleCollapseAllClick);
+        if (this.expandAllToggler()) {
+            this.expandAllToggler().addEventListener("click", this.handleExpandAllClick);
+            this.collapseAllToggler().addEventListener("click", this.handleCollapseAllClick);
+        }
     }
 
     frameworkDetailsToggleElement() {
