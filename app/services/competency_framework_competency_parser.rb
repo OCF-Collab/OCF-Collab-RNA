@@ -9,10 +9,10 @@ class CompetencyFrameworkCompetencyParser
     {
       identifier: attr_value("identifier"),
       code: attr_value("codedNotation"),
-      label: attr_value("competencyCategory"),
+      label: attr_lang_value("competencyCategory"),
       name: attr_value("competencyLabel"),
       competency_text: attr_lang_value("competencyText"),
-      competency_category: attr_value("competencyCategory"),
+      competency_category: attr_lang_value("competencyCategory"),
       concept_keyword: attr_value("conceptKeyword"),
       education_level: attr_value("educationLevelType"),
       complexity_level: attr_value("complexityLevel"),
@@ -36,6 +36,10 @@ class CompetencyFrameworkCompetencyParser
   end
 
   def attr_lang_value(key)
+    if attr_value(key).blank?
+      return nil
+    end
+
     attr_value(key)[language_code]
   end
 
