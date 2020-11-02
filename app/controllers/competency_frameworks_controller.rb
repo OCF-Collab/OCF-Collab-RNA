@@ -1,11 +1,13 @@
 class CompetencyFrameworksController < ApplicationController
   def index
-    @competency_frameworks = []
+    if params[:query].present?
+      @query = params[:query]
+      @competency_frameworks_metadata = CompetencyFrameworksSearch.new(query: params[:query]).competency_frameworks_metadata
+    end
   end
 
-  def search
-    @competency_frameworks = CompetencyFrameworksSearch.new(query: params.require(:search).require(:query)).competency_frameworks
-
-    render :index
+  def show
+    @competency_framework_metadata = CompetencyFrameworkMetadataFetcher.new(id: params[:id]).competency_framework_metadata
+    @competency_framework = CompetencyFrameworkFetcher.new(id: params[:id]).competency_framework
   end
 end

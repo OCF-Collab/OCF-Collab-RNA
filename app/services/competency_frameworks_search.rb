@@ -7,9 +7,9 @@ class CompetencyFrameworksSearch
     @query = query
   end
 
-  def competency_frameworks
+  def competency_frameworks_metadata
     @competency_frameworks ||= response_data["search"]["results"].map do |result|
-      result["framework"].symbolize_keys
+      CompetencyFrameworkMetadataParser.new(framework_metadata: result["framework"]).competency_framework_metadata
     end
   end
 

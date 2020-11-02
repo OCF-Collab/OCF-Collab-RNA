@@ -1,0 +1,16 @@
+<% if object[attribute].present? %>
+  <tr>
+    <th><%= label %></th>
+    <td>
+      <% if object[attribute].is_a?(Array) %>
+        <ul>
+          <% object[attribute].each do |value| %>
+            <li><%= value %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <%= object[attribute] %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

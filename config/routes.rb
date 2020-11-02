@@ -3,9 +3,7 @@ Rails.application.routes.draw do
   root to: "competency_frameworks#index"
 
 
-  resources :competency_frameworks, only: [:index] do
-    collection do
-      get :search
-    end
-  end
+  resources :competency_frameworks,
+    only: [:index, :show],
+    constraints: { :id => /.*/ }
 end

@@ -1,0 +1,20 @@
+<li class="tree-item <% if competency.children.present? %>has-children collapsed<% end %>">
+  <div class="header">
+    <% if competency.children.present? %>
+      <div class="collapse-toggle">❯</div>
+    <% end %>
+    <div class="details-toggle p-1">
+      <%= competency.competency_text %>
+    </div>
+  </div>
+
+  <div class="details">
+    <%= render partial: "competency_frameworks/show/competency_details", locals: { competency: competency } %>
+  </div>
+
+  <% if competency.children.present? %>
+    <ul class="children list-unstyled">
+      <%= render partial: "competency_frameworks/show/tree_item", collection: competency.children, as: :competency %>
+    </ul>
+  <% end %>
+</li>

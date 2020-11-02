@@ -1,5 +1,9 @@
-<%= render partial: "search", locals: { query: params.dig(:search, :query) } %>
+<%= render partial: "search", locals: { query: @query } %>
 
 <div class="mt-3">
-  <%= render partial: "results", locals: { results: @competency_frameworks } %>
+  <% if @query.present? %>
+    <%= render partial: "results", locals: { results: @competency_frameworks_metadata } %>
+  <% else %>
+    <%= render partial: "no_query" %>
+  <% end %>
 </div>

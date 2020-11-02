@@ -1,0 +1,23 @@
+<div class="competency-tree">
+  <ul class="list-unstyled">
+    <li class="framework-item">
+      <div class="framework-header">
+        <%= render partial: "competency_frameworks/show/framework_header", locals: { competency_framework: competency_framework, competency_framework_metadata: competency_framework_metadata } %>
+      </div>
+
+      <div class="details">
+        <%= render partial: "competency_frameworks/show/framework_details", locals: { competency_framework: competency_framework } %>
+      </div>
+
+      <h6>
+        Competencies
+        <% if competency_framework.hierarchical? %>
+          <small class="float-right">(<a href="#" class="expand-all">Expand all</a> / <a href="#" class="collapse-all">Collapse all</a>)</small>
+        <% end %>
+      </h6>
+      <ul class="competencies list-unstyled">
+        <%= render partial: "competency_frameworks/show/tree_item", collection: competency_framework.competencies, as: :competency %>
+      </ul>
+    </li>
+  </ul>
+</div>

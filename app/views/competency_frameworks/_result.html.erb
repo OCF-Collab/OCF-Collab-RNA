@@ -1,9 +1,13 @@
 <li class="media p-3 border-bottom">
   <div class="media-body">
-    <h6><%= result[:name] %></h6>
-    <div class="media-body text-muted small">
-      <%= result[:description] %>
-    </div>
+    <h6>
+      <%= link_to competency_framework.name, competency_framework_path(id: competency_framework.id) %>
+    </h6>
+    <% if competency_framework.description.present? %>
+      <div class="media-body text-muted small">
+        <%= competency_framework.description %>
+      </div>
+    <% end %>
   </div>
-  <%= image_tag result[:providerLogoUrl], class: "ml-3 align-self-center", width: 100, alt: result[:attributionName] %>
+  <%= image_tag competency_framework.attribution_logo_url, class: "ml-3 align-self-center", width: 100, alt: competency_framework.attribution_name %>
 </li>
