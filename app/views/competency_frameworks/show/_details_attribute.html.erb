@@ -1,15 +1,15 @@
-<% if object[attribute].present? %>
+<% if object[attribute[:key]].present? %>
   <tr>
-    <th><%= label %></th>
+    <th><%= attribute[:label] %></th>
     <td>
-      <% if object[attribute].is_a?(Array) %>
+      <% if object[attribute[:key]].is_a?(Array) %>
         <ul>
-          <% object[attribute].each do |value| %>
+          <% object[attribute[:key]].each do |value| %>
             <li><%= value %></li>
           <% end %>
         </ul>
       <% else %>
-        <%= simple_format(object[attribute]) %>
+        <%= simple_format(object[attribute[:key]]) %>
       <% end %>
     </td>
   </tr>
