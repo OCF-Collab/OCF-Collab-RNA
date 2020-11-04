@@ -3,7 +3,7 @@
     <h5>
       <%= competency_framework.title %>
     </h5>
-    <%= competency_framework.description %>
+    <%= truncate(competency_framework.description, length: 200) %>
   </div>
 
   <div class="flex-grow-1">

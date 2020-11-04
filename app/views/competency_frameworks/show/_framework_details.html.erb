@@ -1,5 +1,7 @@
 <table class="table">
   <tbody>
+    <%= render partial: "competency_frameworks/show/details_attribute", locals: { object: competency_framework, attribute: :title, label: "Title" } %>
+    <%= render partial: "competency_frameworks/show/details_attribute", locals: { object: competency_framework, attribute: :description, label: "Description" } %>
     <%= render partial: "competency_frameworks/show/details_attribute", locals: { object: competency_framework, attribute: :publisher, label: "Publisher" } %>
     <%= render partial: "competency_frameworks/show/details_attribute", locals: { object: competency_framework, attribute: :publisher_name, label: "Publisher name" } %>
     <%= render partial: "competency_frameworks/show/details_attribute", locals: { object: competency_framework, attribute: :education_level, label: "Education level" } %>

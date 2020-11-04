@@ -1,9 +1,13 @@
 Competency = Struct.new(
   :identifier,
   :code,
+  :alternative_code,
   :label,
+  :alternative_label,
   :name,
   :competency_text,
+  :abbreviated_competency_text,
+  :comment,
   :competency_category,
   :concept_keyword,
   :education_level,

@@ -5,7 +5,7 @@
     </h6>
     <% if competency_framework.description.present? %>
       <div class="media-body text-muted small">
-        <%= competency_framework.description %>
+        <%= truncate(competency_framework.description, length: 500) %>
       </div>
     <% end %>
   </div>
