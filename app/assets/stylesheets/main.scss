@@ -12,6 +12,10 @@ html {
     }
   }
 
+  .children .tree-item {
+    margin-left: 1.5rem;
+  }
+
   .selected > .framework-header {
     background: #cccccc;
   }
@@ -21,11 +25,11 @@ html {
   }
 
   .competencies {
-    margin-left: 1rem;
+    margin-left: 1.5rem;
 
-    .children {
-      margin-left: 2rem;
-    }
+    /* .children { */
+    /*   margin-left: 2rem; */
+    /* } */
 
     .collapsed .children {
       display: none;
@@ -48,17 +52,22 @@ html {
 
     .collapse-toggle {
       position: absolute;
-      left: -1rem;
+      left: -1.5rem;
       top: 50%;
-      margin-top: -0.5rem;
-      width: 1rem;
-      height: 1rem;
+      margin-top: -0.675rem;
+      width: 1.35rem;
+      height: 1.35rem;
       display: inline-block;
       font-size: 0.6rem;
-      line-height: 1rem;
+      line-height: 1.35rem;
       text-align: center;
-      transform: rotate(90deg);
-      transition: transform 0.3s;
+      cursor: pointer;
+
+      span {
+        display: block;
+        transform: rotate(90deg);
+        transition: transform 0.3s;
+      }
 
       &:hover {
         background: #eeeeee;
@@ -66,7 +75,7 @@ html {
     }
 
     .collapsed {
-      .collapse-toggle {
+      .collapse-toggle span {
         transform: rotate(0deg);
       }
     }

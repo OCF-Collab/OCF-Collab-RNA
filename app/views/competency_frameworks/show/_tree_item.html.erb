@@ -1,7 +1,7 @@
 <li class="tree-item <% if competency.children.present? %>has-children collapsed<% end %>">
   <div class="header">
     <% if competency.children.present? %>
-      <div class="collapse-toggle">❯</div>
+      <div class="collapse-toggle"><span>❯</span></div>
     <% end %>
     <div class="details-toggle p-1">
       <%= competency.competency_text %>
