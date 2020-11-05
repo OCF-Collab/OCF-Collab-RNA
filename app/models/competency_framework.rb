@@ -6,17 +6,17 @@ COMPETENCY_FRAMEWORK_ATTRIBUTES = [
     key: :description,
     label: "Description",
   }, {
-    key: :publisher,
-    label: "Publisher",
-  }, {
-    key: :publisher_name,
-    label: "Publisher Name",
-  }, {
     key: :education_level,
     label: "Education Level",
   }, {
     key: :language,
     label: "Language",
+  }, {
+    key: :publisher,
+    label: "Publisher",
+  }, {
+    key: :publisher_name,
+    label: "Publisher Name",
   }, {
     key: :rights,
     label: "Rights",
@@ -58,7 +58,6 @@ COMPETENCY_FRAMEWORK_ATTRIBUTES = [
 
 CompetencyFramework = Struct.new(
   *COMPETENCY_FRAMEWORK_ATTRIBUTES.map { |a| a[:key] },
-  :id,
   :competencies,
   keyword_init: true,
 ) do

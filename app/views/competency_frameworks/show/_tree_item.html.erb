@@ -4,7 +4,10 @@
       <div class="collapse-toggle"><span>❯</span></div>
     <% end %>
     <div class="details-toggle p-1">
-      <%= competency.competency_text %>
+      <% if competency.code.present? %>
+        <strong><%= competency.code %></strong>
+      <% end %>
+      <%= competency.abbreviated_competency_text || competency.competency_text %>
     </div>
   </div>
 

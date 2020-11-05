@@ -13,6 +13,8 @@ services:
       - ocf_collab
     ports:
       - 3005:3005
+    stdin_open: true
+    tty: true
 
 networks:
   ocf_collab:

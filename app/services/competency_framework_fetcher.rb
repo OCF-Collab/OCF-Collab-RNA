@@ -5,6 +5,7 @@ class CompetencyFrameworkFetcher
 
   METAMODEL_PARSERS = {
     "https://ocf-collab.org/concepts/6ad27cff-5832-4b3d-bd3e-892208b80cad" => CompetencyFrameworkParsers::Asn::Framework,
+    "https://ocf-collab.org/concepts/f63b9a67-543a-49ab-b5ed-8296545c1db5" => CompetencyFrameworkParsers::Case::Framework,
   }
 
   attr_reader :id

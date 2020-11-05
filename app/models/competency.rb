@@ -48,6 +48,9 @@ COMPETENCY_ATTRIBUTES = [
     key: :creator,
     label: "Creator",
   }, {
+    key: :subject,
+    label: "Subject",
+  }, {
     key: :weight,
     label: "Weight",
   }, {
