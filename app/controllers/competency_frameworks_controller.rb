@@ -7,7 +7,9 @@ class CompetencyFrameworksController < ApplicationController
   end
 
   def show
-    @competency_framework_metadata = CompetencyFrameworkMetadataFetcher.new(id: params[:id]).competency_framework_metadata
-    @competency_framework = CompetencyFrameworkFetcher.new(id: params[:id]).competency_framework
+    fetcher = CompetencyFrameworkFetcher.new(id: params[:id])
+
+    @competency_framework_metadata = fetcher.competency_framework_metadata
+    @competency_framework = fetcher.competency_framework
   end
 end

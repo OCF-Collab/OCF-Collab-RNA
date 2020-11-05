@@ -1,8 +1,9 @@
 CompetencyFrameworkMetadata = Struct.new(
   :id,
-  :name,
+  :title,
   :description,
   :attribution_name,
   :attribution_logo_url,
+  :provider_meta_model,
   keyword_init: true,
 )

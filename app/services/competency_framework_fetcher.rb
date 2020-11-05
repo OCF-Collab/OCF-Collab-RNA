@@ -1,7 +1,11 @@
 require "cgi"
 
 class CompetencyFrameworkFetcher
-  COMPETENCY_FRAMEWORK_PATH = "/api/competency_frameworks"
+  COMPETENCY_FRAMEWORKS_PATH = "/api/competency_frameworks"
+
+  METAMODEL_PARSERS = {
+    "https://ocf-collab.org/concepts/6ad27cff-5832-4b3d-bd3e-892208b80cad" => CompetencyFrameworkParsers::Asn::Framework,
+  }
 
   attr_reader :id
 
@@ -10,7 +14,7 @@ class CompetencyFrameworkFetcher
   end
 
   def competency_framework
-    @competency_framework ||= CompetencyFrameworkParser.new(body: response_data).competency_framework
+    @competency_framework ||= competency_framework_parser.new(body: response_data).competency_framework
   end
 
   def response_data
@@ -31,8 +35,16 @@ class CompetencyFrameworkFetcher
 
   def path
     "%s/%s/asset_file" % [
-      COMPETENCY_FRAMEWORK_PATH,
+      COMPETENCY_FRAMEWORKS_PATH,
       CGI.escape(id),
     ]
+  end
+
+  def competency_framework_parser
+    METAMODEL_PARSERS[competency_framework_metadata.provider_meta_model]
+  end
+
+  def competency_framework_metadata
+    @competency_framework_metadata ||= CompetencyFrameworkMetadataFetcher.new(id: id).competency_framework_metadata
   end
 end
