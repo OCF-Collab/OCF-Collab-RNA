@@ -1,6 +1,6 @@
-module CompetencyFrameworkParsers
-  module Asn
-    class Competencies
+module Metamodels
+  module CtdlAsn
+    class CompetenciesParser
       attr_reader :body
 
       def initialize(body:)
@@ -15,11 +15,11 @@ module CompetencyFrameworkParsers
 
       def collect_competency(id)
         competency_data = competencies_map[id]
-        competency_attributes = CompetencyFrameworkParsers::Asn::Competency.new(competency_data: competency_data).competency_attributes
+        competency_attributes = Metamodels::CtdlAsn::CompetencyParser.new(competency_data: competency_data).competency_attributes
         children_ids = competency_data["ceasn:hasChild"]
         children = children_ids.present? && children_ids.map { |child_id| collect_competency(child_id) }
 
-        ::Competency.new(
+        Competency.new(
           **competency_attributes,
           children: children,
         )

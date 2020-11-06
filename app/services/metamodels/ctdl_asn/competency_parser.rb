@@ -1,6 +1,6 @@
-module CompetencyFrameworkParsers
-  module Asn
-    class Competency
+module Metamodels
+  module CtdlAsn
+    class CompetencyParser
       attr_reader :competency_data
 
       def initialize(competency_data:)

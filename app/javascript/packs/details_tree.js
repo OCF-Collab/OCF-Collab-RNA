@@ -1,130 +1,130 @@
-class DetailsTree {
-    constructor(treeElelement, detailsElementA) {
-        this.treeElement = treeElement;
-        this.detailsElement = detailsElement;
-        this.selectedCompetencyElement = null;
+// class DetailsTree {
+//     constructor(treeElelement, detailsElementA) {
+//         this.treeElement = treeElement;
+//         this.detailsElement = detailsElement;
+//         this.selectedCompetencyElement = null;
 
-        this.handleFrameworkDetailsToggleClick = this.handleFrameworkDetailsToggleClick.bind(this);
-        this.handleDetailsToggleClick = this.handleDetailsToggleClick.bind(this);
-        this.handleCollapseToggleClick = this.handleCollapseToggleClick.bind(this);
-        this.handleExpandAllClick = this.handleExpandAllClick.bind(this);
-        this.handleCollapseAllClick = this.handleCollapseAllClick.bind(this);
-    }
+//         this.handleFrameworkDetailsToggleClick = this.handleFrameworkDetailsToggleClick.bind(this);
+//         this.handleDetailsToggleClick = this.handleDetailsToggleClick.bind(this);
+//         this.handleCollapseToggleClick = this.handleCollapseToggleClick.bind(this);
+//         this.handleExpandAllClick = this.handleExpandAllClick.bind(this);
+//         this.handleCollapseAllClick = this.handleCollapseAllClick.bind(this);
+//     }
 
-    init() {
-        this.bindEvents();
-        this.selectFramework();
-    }
+//     init() {
+//         this.bindEvents();
+//         this.selectFramework();
+//     }
 
-    bindEvents() {
-        this.frameworkDetailsToggleElement().addEventListener("click", this.handleFrameworkDetailsToggleClick);
+//     bindEvents() {
+//         this.frameworkDetailsToggleElement().addEventListener("click", this.handleFrameworkDetailsToggleClick);
 
-        this.detailsToggleElements().forEach((toggleElement) => {
-            toggleElement.addEventListener("click", this.handleDetailsToggleClick);
-        });
+//         this.detailsToggleElements().forEach((toggleElement) => {
+//             toggleElement.addEventListener("click", this.handleDetailsToggleClick);
+//         });
 
-        this.collapseToggleElements().forEach((toggleElement) => {
-            toggleElement.addEventListener("click", this.handleCollapseToggleClick);
-        });
+//         this.collapseToggleElements().forEach((toggleElement) => {
+//             toggleElement.addEventListener("click", this.handleCollapseToggleClick);
+//         });
 
-        if (this.expandAllToggler()) {
-            this.expandAllToggler().addEventListener("click", this.handleExpandAllClick);
-            this.collapseAllToggler().addEventListener("click", this.handleCollapseAllClick);
-        }
-    }
+//         if (this.expandAllToggler()) {
+//             this.expandAllToggler().addEventListener("click", this.handleExpandAllClick);
+//             this.collapseAllToggler().addEventListener("click", this.handleCollapseAllClick);
+//         }
+//     }
 
-    frameworkDetailsToggleElement() {
-        return this.treeElement.querySelector(".framework-header");
-    }
+//     frameworkDetailsToggleElement() {
+//         return this.treeElement.querySelector(".framework-header");
+//     }
 
-    handleFrameworkDetailsToggleClick(event) {
-        this.selectFramework();
-    }
+//     handleFrameworkDetailsToggleClick(event) {
+//         this.selectFramework();
+//     }
 
-    selectFramework() {
-        const frameworkDetailsElement = this.frameworkElement().querySelector(".details");
+//     selectFramework() {
+//         const frameworkDetailsElement = this.frameworkElement().querySelector(".details");
 
-        this.detailsElement.innerHTML = "";
-        this.detailsElement.append(frameworkDetailsElement.cloneNode(true));
+//         this.detailsElement.innerHTML = "";
+//         this.detailsElement.append(frameworkDetailsElement.cloneNode(true));
 
-        if (this.selectedCompetencyElement) {
-            this.selectedCompetencyElement.classList.remove("selected");
-            this.selectedCompetencyElement = null;
-        }
+//         if (this.selectedCompetencyElement) {
+//             this.selectedCompetencyElement.classList.remove("selected");
+//             this.selectedCompetencyElement = null;
+//         }
 
-        this.frameworkElement().classList.add("selected");
-    }
+//         this.frameworkElement().classList.add("selected");
+//     }
 
-    frameworkElement() {
-        return this.treeElement.querySelector(".framework-item");
-    }
+//     frameworkElement() {
+//         return this.treeElement.querySelector(".framework-item");
+//     }
 
-    detailsToggleElements() {
-        return this.treeElement.querySelectorAll(".details-toggle");
-    }
+//     detailsToggleElements() {
+//         return this.treeElement.querySelectorAll(".details-toggle");
+//     }
 
-    handleDetailsToggleClick(event) {
-        const toggleElement = event.target;
-        const competencyElement = toggleElement.closest(".tree-item");
-        const competencyDetailsElement = competencyElement.querySelector(".details");
+//     handleDetailsToggleClick(event) {
+//         const toggleElement = event.target;
+//         const competencyElement = toggleElement.closest(".tree-item");
+//         const competencyDetailsElement = competencyElement.querySelector(".details");
 
-        this.detailsElement.innerHTML = "";
-        this.detailsElement.append(competencyDetailsElement.cloneNode(true));
+//         this.detailsElement.innerHTML = "";
+//         this.detailsElement.append(competencyDetailsElement.cloneNode(true));
 
-        this.frameworkElement().classList.remove("selected");
+//         this.frameworkElement().classList.remove("selected");
 
-        if (this.selectedCompetencyElement) {
-            this.selectedCompetencyElement.classList.remove("selected");
-        }
+//         if (this.selectedCompetencyElement) {
+//             this.selectedCompetencyElement.classList.remove("selected");
+//         }
 
-        competencyElement.classList.add("selected");
-        this.selectedCompetencyElement = competencyElement;
-    }
+//         competencyElement.classList.add("selected");
+//         this.selectedCompetencyElement = competencyElement;
+//     }
 
-    collapseToggleElements() {
-        return this.treeElement.querySelectorAll(".collapse-toggle");
-    }
+//     collapseToggleElements() {
+//         return this.treeElement.querySelectorAll(".collapse-toggle");
+//     }
 
-    handleCollapseToggleClick(event) {
-        const toggleElement = event.target;
-        const competencyElement = toggleElement.closest(".tree-item");
-        const isCollapsed = competencyElement.classList.contains('collapsed');
-        competencyElement.classList.toggle('collapsed', !isCollapsed);
-    }
+//     handleCollapseToggleClick(event) {
+//         const toggleElement = event.target;
+//         const competencyElement = toggleElement.closest(".tree-item");
+//         const isCollapsed = competencyElement.classList.contains('collapsed');
+//         competencyElement.classList.toggle('collapsed', !isCollapsed);
+//     }
 
-    expandAllToggler() {
-        return this.treeElement.querySelector(".expand-all");
-    }
+//     expandAllToggler() {
+//         return this.treeElement.querySelector(".expand-all");
+//     }
 
-    collapseAllToggler() {
-        return this.treeElement.querySelector(".collapse-all");
-    }
+//     collapseAllToggler() {
+//         return this.treeElement.querySelector(".collapse-all");
+//     }
 
-    handleExpandAllClick(event) {
-        this.expandAll();
-    }
+//     handleExpandAllClick(event) {
+//         this.expandAll();
+//     }
 
-    expandAll() {
-        this.treeElement.querySelectorAll(".collapsed").forEach((el) => {
-            el.classList.remove("collapsed");
-        });
-    }
+//     expandAll() {
+//         this.treeElement.querySelectorAll(".collapsed").forEach((el) => {
+//             el.classList.remove("collapsed");
+//         });
+//     }
 
-    handleCollapseAllClick(event) {
-        this.collapseAll();
-    }
+//     handleCollapseAllClick(event) {
+//         this.collapseAll();
+//     }
 
-    collapseAll() {
-        this.treeElement.querySelectorAll(".tree-item").forEach((el) => {
-            el.classList.add("collapsed");
-        });
-    }
-}
+//     collapseAll() {
+//         this.treeElement.querySelectorAll(".tree-item").forEach((el) => {
+//             el.classList.add("collapsed");
+//         });
+//     }
+// }
 
-const treeElement = document.getElementById("tree-view");
-const detailsElement = document.getElementById("details-view");
+// const treeElement = document.getElementById("tree-view");
+// const detailsElement = document.getElementById("details-view");
 
-const tree = new DetailsTree(treeElement, detailsElement);
-tree.init();
+// const tree = new DetailsTree(treeElement, detailsElement);
+// tree.init();
 
 

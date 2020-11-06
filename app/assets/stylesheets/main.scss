@@ -1,3 +1,7 @@
+$gray-300: #dee2e6;
+$gray-600: #6c757d;
+$border-radius: 0.25rem;
+
 html {
   font-size: 14px;
 }
@@ -6,6 +10,7 @@ html {
   .framework-header {
     padding: 0.5rem;
     margin-bottom: 2rem;
+    cursor: pointer;
 
     &:hover {
       background: #eeeeee;
@@ -27,10 +32,6 @@ html {
   .competencies {
     margin-left: 1.5rem;
 
-    /* .children { */
-    /*   margin-left: 2rem; */
-    /* } */
-
     .collapsed .children {
       display: none;
     }
@@ -41,6 +42,8 @@ html {
     }
 
     .details-toggle {
+      cursor: pointer;
+
       &:hover {
         background: #eeeeee;
       }
@@ -86,7 +89,17 @@ html {
   position: sticky;
   top: 1rem;
 
+  h6 {
+    margin: 0;
+    padding: 0.75rem;
+    background: $gray-300;
+    color: $gray-600;
+    border-radius: $border-radius;
+  }
+
   .table {
+    margin: 0;
+
     tr:first-child {
       th, td {
         border: none;
@@ -105,6 +118,24 @@ html {
 
     p:last-child {
       margin-bottom: 0;
+    }
+  }
+
+  .actions {
+    border-top: 1px solid $gray-300;
+    padding: 1.5rem 0.75rem 0.75rem;
+  }
+
+  .download-framework {
+    position: relative;
+
+    .spinner-border {
+      display: none;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-left: -0.5rem;
+      margin-top: -0.5rem;
     }
   }
 }

@@ -1,6 +1,6 @@
-module CompetencyFrameworkParsers
-  module Asn
-    class Framework
+module Metamodels
+  module CtdlAsn
+    class FrameworkParser
       attr_reader :body
 
       def initialize(body:)
@@ -58,7 +58,7 @@ module CompetencyFrameworkParsers
       end
 
       def competencies
-        @competencies ||= CompetencyFrameworkParsers::Asn::Competencies.new(body: body).competencies
+        @competencies ||= Metamodels::CtdlAsn::CompetenciesParser.new(body: body).competencies
       end
     end
   end

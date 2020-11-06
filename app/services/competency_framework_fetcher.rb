@@ -3,11 +3,6 @@ require "cgi"
 class CompetencyFrameworkFetcher
   COMPETENCY_FRAMEWORKS_PATH = "/api/competency_frameworks"
 
-  METAMODEL_PARSERS = {
-    "https://ocf-collab.org/concepts/6ad27cff-5832-4b3d-bd3e-892208b80cad" => CompetencyFrameworkParsers::Asn::Framework,
-    "https://ocf-collab.org/concepts/f63b9a67-543a-49ab-b5ed-8296545c1db5" => CompetencyFrameworkParsers::Case::Framework,
-  }
-
   attr_reader :id
 
   def initialize(id:)
@@ -19,7 +14,19 @@ class CompetencyFrameworkFetcher
   end
 
   def response_data
-    @response_data ||= JSON.parse(response.body)
+    @response_data ||= JSON.parse(body)
+  end
+
+  def body
+    response.body
+  end
+
+  def content_type
+    response.content_type
+  end
+
+  def status
+    response.status
   end
 
   def response
@@ -42,7 +49,11 @@ class CompetencyFrameworkFetcher
   end
 
   def competency_framework_parser
-    METAMODEL_PARSERS[competency_framework_metadata.provider_meta_model]
+    metamodel.competency_framework_parser
+  end
+
+  def metamodel
+    @metamodel ||= Metamodels.from_concept_url(competency_framework_metadata.provider_meta_model)
   end
 
   def competency_framework_metadata

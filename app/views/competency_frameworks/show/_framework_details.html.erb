@@ -1,5 +1,25 @@
+<h6>Framework details</h6>
+
 <table class="table">
   <tbody>
     <%= render partial: "competency_frameworks/show/details_attribute", collection: COMPETENCY_FRAMEWORK_ATTRIBUTES, as: :attribute, locals: { object: competency_framework } %>
   </tbody>
 </table>
+
+
+<div class="actions">
+  <div class="btn-group">
+    <a href="<%= download_competency_framework_url(params[:id]) %>" class="btn btn-info download-framework">
+      <span>Export as JSON</span>
+      <div class="spinner-border spinner-border-sm" role="status"></div>
+    </a>
+    <!-- <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         <span class="sr-only">Toggle Dropdown</span>
+         </button>
+         <div class="dropdown-menu">
+         <a class="dropdown-item" href="#">Action</a>
+         <a class="dropdown-item" href="#">Another action</a>
+         <a class="dropdown-item" href="#">Something else here</a>
+         </div> -->
+  </div>
+</div>

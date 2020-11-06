@@ -15,8 +15,10 @@ gem 'webpacker', '~> 4.0'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
+gem 'jquery-rails'
 gem 'bootstrap', '4.5.2'
 gem 'oauth2', '1.4.4'
+gem 'mime-types'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,6 +1,6 @@
-module CompetencyFrameworkParsers
+module Metamodels
   module Case
-    class Framework
+    class FrameworkParser
       attr_reader :body
 
       def initialize(body:)
@@ -44,7 +44,7 @@ module CompetencyFrameworkParsers
       end
 
       def competencies
-        @competencies ||= CompetencyFrameworkParsers::Case::Competencies.new(body: body).competencies
+        @competencies ||= Metamodels::Case::CompetenciesParser.new(body: body).competencies
       end
     end
   end

@@ -12,4 +12,14 @@ class CompetencyFrameworksController < ApplicationController
     @competency_framework_metadata = fetcher.competency_framework_metadata
     @competency_framework = fetcher.competency_framework
   end
+
+  def download
+    fetcher = CompetencyFrameworkFetcher.new(id: params[:id])
+
+    base_filename = params[:id].split("/").last.split(".").first
+    extension = MIME::Types[fetcher.content_type].first.extensions.first
+    filename = [base_filename, extension].join(".")
+
+    send_data fetcher.body, type: fetcher.content_type, status: fetcher.status, filename: filename
+  end
 end

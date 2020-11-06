@@ -1,6 +1,6 @@
-module CompetencyFrameworkParsers
+module Metamodels
   module Case
-    class Competencies
+    class CompetenciesParser
       attr_reader :body
 
       def initialize(body:)
@@ -47,12 +47,12 @@ module CompetencyFrameworkParsers
 
       def collect_competency(id, parent_id = nil)
         competency_data = competencies_map[id]
-        competency_attributes = CompetencyFrameworkParsers::Case::Competency.new(competency_data: competency_data).competency_attributes
+        competency_attributes = Metamodels::Case::CompetencyParser.new(competency_data: competency_data).competency_attributes
 
         competency_children_ids = children_ids(id)
         children = competency_children_ids.present? && competency_children_ids.map { |child_id| collect_competency(child_id, id) }
 
-        ::Competency.new(
+        Competency.new(
           **competency_attributes,
           children: children,
         )

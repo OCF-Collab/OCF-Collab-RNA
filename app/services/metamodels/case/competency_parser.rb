@@ -1,6 +1,6 @@
-module CompetencyFrameworkParsers
+module Metamodels
   module Case
-    class Competency
+    class CompetencyParser
       attr_reader :competency_data
 
       def initialize(competency_data:)
