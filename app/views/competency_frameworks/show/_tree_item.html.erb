@@ -12,7 +12,35 @@
   </div>
 
   <div class="details">
-    <%= render partial: "competency_frameworks/show/competency_details", locals: { competency: competency } %>
+    <h6>Competency details</h6>
+    <table class="table">
+      <tbody>
+        <% COMPETENCY_ATTRIBUTES.each do |attribute| %>
+          <% val = competency[attribute[:key]] %>
+
+          <% if val.present? %>
+            <tr>
+              <th><%= attribute[:label] %></th>
+              <td>
+                <% if val.is_a?(Array) %>
+                  <% if val.size > 1 %>
+                    <ul>
+                      <% val.each do |v| %>
+                        <li><%= simple_format(v) %></li>
+                      <% end %>
+                    </ul>
+                  <% else %>
+                    <%= simple_format(val.first) %>
+                  <% end %>
+                <% else %>
+                  <%= simple_format(val) %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 
   <% if competency.children.present? %>
