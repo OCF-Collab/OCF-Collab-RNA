@@ -16,24 +16,24 @@
     <table class="table">
       <tbody>
         <% COMPETENCY_ATTRIBUTES.each do |attribute| %>
-          <% val = competency[attribute[:key]] %>
+          <% if competency[attribute[:key]].present? %>
+            <% val = Array(competency[attribute[:key]]) %>
 
-          <% if val.present? %>
             <tr>
               <th><%= attribute[:label] %></th>
               <td>
-                <% if val.is_a?(Array) %>
-                  <% if val.size > 1 %>
+                <% if val.size > 1 %>
+                  <% if val.any? { |v| v.length > 20 } %>
                     <ul>
                       <% val.each do |v| %>
                         <li><%= simple_format(v) %></li>
                       <% end %>
                     </ul>
                   <% else %>
-                    <%= simple_format(val.first) %>
+                    <%= val.join(", ") %>
                   <% end %>
                 <% else %>
-                  <%= simple_format(val) %>
+                  <%= simple_format(val.first) %>
                 <% end %>
               </td>
             </tr>
