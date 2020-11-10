@@ -45,7 +45,7 @@ module Metamodels
         end
       end
 
-      def collect_competency(id, parent_id = nil)
+      def collect_competency(id)
         competency_data = competencies_map[id]
         competency_attributes = Metamodels::Case::CompetencyParser.new(competency_data: competency_data).competency_attributes
 

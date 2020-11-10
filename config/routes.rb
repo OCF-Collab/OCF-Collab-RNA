@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   resources :competency_frameworks,
     only: [:index, :show],
+    format: false,
+    defaults: { format: "html" },
     constraints: { :id => /.*/ } do
       member do
         get :download

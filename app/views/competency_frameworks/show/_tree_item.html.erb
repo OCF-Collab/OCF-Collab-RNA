@@ -16,6 +16,8 @@
     <table class="table">
       <tbody>
         <% COMPETENCY_ATTRIBUTES.each do |attribute| %>
+          <% puts attribute %>
+          <% puts competency[attribute[:key]] %>
           <% if competency[attribute[:key]].present? %>
             <% val = Array(competency[attribute[:key]]) %>
 

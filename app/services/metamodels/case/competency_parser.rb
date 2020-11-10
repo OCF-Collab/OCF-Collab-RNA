@@ -25,7 +25,6 @@ module Metamodels
           list_id: attr_value("listEnumeration"),
           creator: attr_value("creator"),
           subject: attr_value("subject"),
-          weight: attr_value("weight"),
           derived_from: nil,
           comprised_of: nil,
           skill_embodied: nil,

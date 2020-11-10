@@ -10,6 +10,7 @@ class CompetencyFrameworkFetcher
   end
 
   def competency_framework
+    puts response_data.inspect
     @competency_framework ||= competency_framework_parser.new(body: response_data).competency_framework
   end
 

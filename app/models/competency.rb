@@ -51,9 +51,6 @@ COMPETENCY_ATTRIBUTES = [
     key: :subject,
     label: "Subject",
   }, {
-    key: :weight,
-    label: "Weight",
-  }, {
     key: :derived_from,
     label: "Derived From",
   }, {
