@@ -50,7 +50,7 @@ module Metamodels
         competency_attributes = Metamodels::Case::CompetencyParser.new(competency_data: competency_data).competency_attributes
 
         competency_children_ids = children_ids(id)
-        children = competency_children_ids.present? && competency_children_ids.map { |child_id| collect_competency(child_id, id) }
+        children = competency_children_ids.present? && competency_children_ids.map { |child_id| collect_competency(child_id) }
 
         Competency.new(
           **competency_attributes,
