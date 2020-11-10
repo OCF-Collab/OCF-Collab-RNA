@@ -35,7 +35,7 @@ module Metamodels
 
       def associations
         @associations = children_associations.sort_by do |association|
-          association["sequenceNumber"]
+          association["sequenceNumber"] || 0
         end
       end
 
