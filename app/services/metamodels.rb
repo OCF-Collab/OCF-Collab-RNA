@@ -10,7 +10,7 @@ module Metamodels
       framework_parser: Metamodels::Case::FrameworkParser,
     }, {
       label: "ASN",
-      concept_url: "https://ocf-collab.org/concepts/concepts/f9a2b710-1cc4-4065-85fd-596b3c40906c",
+      concept_url: "https://ocf-collab.org/concepts/f9a2b710-1cc4-4065-85fd-596b3c40906c",
       framework_parser: Metamodels::Asn::FrameworkParser,
     }
   ]

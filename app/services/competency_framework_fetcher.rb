@@ -3,14 +3,14 @@ require "cgi"
 class CompetencyFrameworkFetcher
   COMPETENCY_FRAMEWORKS_PATH = "/api/competency_frameworks"
 
-  attr_reader :id
+  attr_reader :id, :requested_metamodel
 
-  def initialize(id:)
+  def initialize(id:, requested_metamodel: nil)
     @id = id
+    @requested_metamodel = requested_metamodel
   end
 
   def competency_framework
-    puts response_data.inspect
     @competency_framework ||= competency_framework_parser.new(body: response_data).competency_framework
   end
 
@@ -31,7 +31,7 @@ class CompetencyFrameworkFetcher
   end
 
   def response
-    @response ||= oauth2_token.get(path)
+    @response ||= oauth2_token.get(path, params: params)
   end
 
   def oauth2_token
@@ -49,12 +49,26 @@ class CompetencyFrameworkFetcher
     ]
   end
 
+  def params
+    if requested_metamodel.blank?
+      return nil
+    end
+
+    {
+      metamodel: requested_metamodel,
+    }
+  end
+
   def competency_framework_parser
     metamodel.competency_framework_parser
   end
 
   def metamodel
-    @metamodel ||= Metamodels.from_concept_url(competency_framework_metadata.provider_meta_model)
+    @metamodel ||= Metamodels.from_concept_url(metamodel_concept_url)
+  end
+
+  def metamodel_concept_url
+    requested_metamodel || competency_framework_metadata.provider_meta_model
   end
 
   def competency_framework_metadata

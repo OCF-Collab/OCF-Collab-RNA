@@ -11,10 +11,11 @@ class CompetencyFrameworksController < ApplicationController
 
     @competency_framework_metadata = fetcher.competency_framework_metadata
     @competency_framework = fetcher.competency_framework
+    @available_metamodels = Metamodels::METAMODELS
   end
 
   def download
-    fetcher = CompetencyFrameworkFetcher.new(id: params[:id])
+    fetcher = CompetencyFrameworkFetcher.new(id: params[:id], requested_metamodel: params[:metamodel])
 
     base_filename = params[:id].split("/").last.split(".").first
     extension = MIME::Types[fetcher.content_type].first.extensions.first
