@@ -1,23 +1,25 @@
 <h6>Framework details</h6>
 
-<table class="table">
-  <tbody>
-    <%= render partial: "competency_frameworks/show/details_attribute", collection: COMPETENCY_FRAMEWORK_ATTRIBUTES, as: :attribute, locals: { object: competency_framework } %>
-  </tbody>
-</table>
+<div class="table-wrapper">
+  <table class="table">
+    <tbody>
+      <%= render partial: "competency_frameworks/show/details_attribute", collection: COMPETENCY_FRAMEWORK_ATTRIBUTES, as: :attribute, locals: { object: competency_framework } %>
+    </tbody>
+  </table>
 
-<% framework_metamodel = available_metamodels.find { |m| m[:concept_url] == competency_framework_metadata.provider_meta_model } %>
+  <% framework_metamodel = available_metamodels.find { |m| m[:concept_url] == competency_framework_metadata.provider_meta_model } %>
 
-<div class="actions">
-  <div class="btn-group" role="group">
-    <a href="<%= download_competency_framework_url(competency_framework_metadata.id) %>" class="btn btn-info">Export as <%= framework_metamodel[:label] %></a>
-    <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <span class="sr-only">Select metamodel</span>
-    </button>
-    <div class="dropdown-menu">
-      <% (available_metamodels - [framework_metamodel]).each do |metamodel| %>
-        <a href="<%= download_competency_framework_url(competency_framework_metadata.id, metamodel: metamodel[:concept_url]) %>" class="dropdown-item"><%= metamodel[:label] %></a>
-      <% end %>
+  <div class="actions">
+    <div class="btn-group" role="group">
+      <a href="<%= download_competency_framework_url(competency_framework_metadata.id) %>" class="btn btn-info">Export as <%= framework_metamodel[:label] %></a>
+      <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="sr-only">Select metamodel</span>
+      </button>
+      <div class="dropdown-menu">
+        <% (available_metamodels - [framework_metamodel]).each do |metamodel| %>
+          <a href="<%= download_competency_framework_url(competency_framework_metadata.id, metamodel: metamodel[:concept_url]) %>" class="dropdown-item"><%= metamodel[:label] %></a>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

@@ -6,6 +6,10 @@ html {
   font-size: 14px;
 }
 
+.navbar img {
+  height: 3rem;
+}
+
 .competency-tree {
   .framework-header {
     padding: 0.5rem;
@@ -95,6 +99,11 @@ html {
     background: $gray-300;
     color: $gray-600;
     border-radius: $border-radius;
+  }
+
+  .table-wrapper {
+    max-height: calc(100vh - 5rem - 2rem - 2.5rem); // Viewport height - topbar - panel margin - details header
+    overflow-y: auto;
   }
 
   .table {
