@@ -1,3 +1,5 @@
+<% content_for :title, ["Frameworks search", @query].compact.join(": ") %>
+
 <%= render partial: "search", locals: { query: @query } %>
 
 <div class="mt-3">
