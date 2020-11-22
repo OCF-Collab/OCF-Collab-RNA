@@ -2,7 +2,7 @@ module Metamodels
   METAMODELS = [
     {
       label: "CTDL-ASN",
-      concept_url: "https://ocf-collab.org/concepts/6ad27cff-5832-4b3d-bd3e-892208b80cad",
+      concept_url: "https://ocf-collab.org/concepts/f9a2b710-1cc4-4065-85fd-596b3c40906c",
       framework_parser: Metamodels::CtdlAsn::FrameworkParser,
     }, {
       label: "CASE",
@@ -10,7 +10,7 @@ module Metamodels
       framework_parser: Metamodels::Case::FrameworkParser,
     }, {
       label: "ASN",
-      concept_url: "https://ocf-collab.org/concepts/f9a2b710-1cc4-4065-85fd-596b3c40906c",
+      concept_url: "https://ocf-collab.org/concepts/6ad27cff-5832-4b3d-bd3e-892208b80cad",
       framework_parser: Metamodels::Asn::FrameworkParser,
     }
   ]
