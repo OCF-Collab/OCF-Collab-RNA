@@ -3,6 +3,12 @@ module Metamodels
     class FrameworkParser
       FRAMEWORK_TYPE_KEY = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
       FRAMEWORK_TYPE_VALUE = "http://purl.org/ASN/schema/core/StandardDocument"
+      SCHEMA_URLS = {
+        asn: "http://purl.org/ASN/schema/core",
+        dcterms: "http://purl.org/dc/terms",
+        dcelements: "http://purl.org/dc/elements/1.1",
+        loc: "http://id.loc.gov/vocabulary/relators",
+      }
 
       attr_reader :body
 
@@ -16,33 +22,50 @@ module Metamodels
 
       def framework_attributes
         {
-          title: attr_value("http://purl.org/dc/elements/1.1/title"),
-          description: attr_value("http://purl.org/dc/terms/description"),
-          education_level: list_attr_value("http://purl.org/dc/terms/educationLevel"),
-          language: attr_value("http://purl.org/dc/terms/language"),
+          title: attr_value(:dcelements, "title"),
+          description: attr_value(:dcterms, "description"),
+          cirruculum_subject: list_attr_value(:dcterms, "subject"),
+          education_level: list_attr_value(:dcterms, "educationLevel"),
+          language: list_attr_value(:dcterms, "language"),
+          author: list_attr_value(:loc, "aut"),
           publisher: nil,
-          publisher_name: attr_value("http://purl.org/dc/elements/1.1/publisher"),
-          rights: document_attr_value("http://purl.org/dc/terms/rights"),
-          rights_holder: document_attr_value("http://purl.org/dc/terms/rightsHolder"),
-          license: attr_value("http://purl.org/dc/terms/license"),
-          table_of_contents: attr_value("http://purl.org/dc/terms/tableOfContents"),
+          publisher_name: list_attr_value(:dcelements, "publisher"),
+          concept_keyword: list_attr_value(:asn, "conceptKeyword"),
+          concept_category: list_attr_value(:asn, "conceptTerm"),
+          rights: document_list_attr_value(:dcterms, "rights"),
+          rights_holder: document_list_attr_value(:dcterms, "rightsHolder"),
+          license: list_attr_value(:dcterms, "license"),
+          table_of_contents: list_attr_value(:dcterms, "tableOfContents"),
           identifier: nil,
-          valid_start_date: nil,
+          date_created: list_attr_value(:dcterms, "created"),
+          valid_start_date: list_attr_value(:dcterms, "valid"),
           valid_end_date: nil,
-          jurisdiction: attr_value("http://purl.org/ASN/schema/core/jurisdiction"),
+          jurisdiction: list_attr_value(:asn, "jurisdiction"),
           derived_from: nil,
-          publication_status: attr_value("http://purl.org/ASN/schema/core/publicationStatus"),
-          source: attr_value("http://purl.org/dc/terms/source"),
-          date_added: attr_value("http://purl.org/ASN/schema/core/repositoryDate"),
+          publication_status: list_attr_value(:asn, "publicationStatus"),
+          source: list_attr_value(:dcterms, "source"),
+          date_added: list_attr_value(:asn, "repositoryDate"),
           competencies: competencies,
         }
       end
 
-      def attr_value(key)
-        return nil unless framework_data.has_key?(key)
-
-        framework_data[key].first["value"]
+      def attr_value(schema, key)
+        list_attr_value(schema, key)&.first
       end
+
+      def list_attr_value(schema, key)
+        return nil unless framework_data.has_key?(attribute(schema, key))
+
+        framework_data[attribute(schema, key)].map { |v| v["value"] }
+      end
+
+      def attribute(schema, key)
+        "%s/%s" % [
+          SCHEMA_URLS[schema],
+          key,
+        ]
+      end
+
 
       def framework_data
         @framework_data ||= body.values.find do |item|
@@ -51,16 +74,10 @@ module Metamodels
         end
       end
 
-      def list_attr_value(key)
-        return nil unless framework_data.has_key?(key)
+      def document_list_attr_value(schema, key)
+        return nil unless document_data.has_key?(attribute(schema, key))
 
-        framework_data[key].map { |v| v["value"] }
-      end
-
-      def document_attr_value(key)
-        return nil unless document_data.has_key?(key)
-
-        document_data[key].first["value"]
+        document_data[attribute(schema, key)].map { |v| v["value"] }
       end
 
       def document_data
