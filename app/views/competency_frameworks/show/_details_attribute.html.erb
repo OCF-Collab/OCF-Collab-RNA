@@ -4,19 +4,7 @@
   <tr>
     <th><%= attribute[:label] %></th>
     <td>
-      <% if val.is_a?(Array) %>
-        <% if val.size > 1 %>
-          <ul>
-            <% val.each do |v| %>
-              <li><%= simple_format(v) %></li>
-            <% end %>
-          </ul>
-        <% else %>
-          <%= simple_format(val.first) %>
-        <% end %>
-      <% else %>
-        <%= simple_format(val) %>
-      <% end %>
+      <%= display_attribute_value(val) %>
     </td>
   </tr>
 <% end %>

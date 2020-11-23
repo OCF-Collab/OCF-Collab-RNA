@@ -23,19 +23,7 @@
               <tr>
                 <th><%= attribute[:label] %></th>
                 <td>
-                  <% if val.size > 1 %>
-                    <% if val.any? { |v| v.length > 20 } %>
-                      <ul>
-                        <% val.each do |v| %>
-                          <li><%= simple_format(v) %></li>
-                        <% end %>
-                      </ul>
-                    <% else %>
-                      <%= val.join(", ") %>
-                    <% end %>
-                  <% else %>
-                    <%= simple_format(val.first) %>
-                  <% end %>
+                  <%= display_attribute_value(val) %>
                 </td>
               </tr>
             <% end %>
