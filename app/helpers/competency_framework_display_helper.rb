@@ -1,5 +1,9 @@
 module CompetencyFrameworkDisplayHelper
   def display_attribute_value(value)
+    if value.is_a?(Array) && value.size == 1
+      display_attribute_value(value.first)
+    end
+
     if value.is_a?(Hash)
       return display_hash_attribute_value(value)
     end
@@ -25,10 +29,6 @@ module CompetencyFrameworkDisplayHelper
   end
 
   def display_array_attribute_value(value)
-    if value.length == 1
-      return display_string_attribute_value(value.first)
-    end
-
     if value.all? { |v| v.length < 20 }
       return value.join(", ")
     end

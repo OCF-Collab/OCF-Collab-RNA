@@ -17,9 +17,8 @@
       <table class="table">
         <tbody>
           <% COMPETENCY_ATTRIBUTES.each do |attribute| %>
-            <% if competency[attribute[:key]].present? %>
-              <% val = Array(competency[attribute[:key]]) %>
-
+            <% val = competency[attribute[:key]] %>
+            <% if val.present? %>
               <tr>
                 <th><%= attribute[:label] %></th>
                 <td>
