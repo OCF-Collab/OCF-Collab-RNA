@@ -9,7 +9,7 @@ class CompetencyFrameworksSearch
 
   def competency_frameworks_metadata
     @competency_frameworks ||= response_data["search"]["results"].map do |result|
-      CompetencyFrameworkMetadataParser.new(framework_metadata: result["framework"]).competency_framework_metadata
+      CompetencyFrameworkMetadataParser.new(framework_metadata: result).competency_framework_metadata
     end
   end
 

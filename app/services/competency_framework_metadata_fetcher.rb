@@ -14,7 +14,7 @@ class CompetencyFrameworkMetadataFetcher
   end
 
   def framework_metadata
-    response_data["framework"]
+    response_data
   end
 
   def response_data

@@ -26,7 +26,6 @@ module Metamodels
           language: attr_value("inLanguage"),
           list_id: attr_value("listID"),
           creator: attr_value("author"),
-          subject: nil,
           license: nil,
           weight: attr_value("weight"),
           derived_from: attr_value("derivedFrom"),
