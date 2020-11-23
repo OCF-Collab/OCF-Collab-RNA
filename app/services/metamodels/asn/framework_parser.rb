@@ -37,7 +37,7 @@ module Metamodels
           license: list_attr_value(:dcterms, "license"),
           table_of_contents: list_attr_value(:dcterms, "tableOfContents"),
           identifier: nil,
-          date_created: list_attr_value(:dcterms, "created"),
+          date_created: document_list_attr_value(:dcterms, "created"),
           valid_start_date: list_attr_value(:dcterms, "valid"),
           valid_end_date: nil,
           jurisdiction: list_attr_value(:asn, "jurisdiction"),
