@@ -15,15 +15,20 @@ module Metamodels
         {
           title: attr_lang_value("name"),
           description: attr_lang_value("description"),
+          cirruculum_subject: nil,
           education_level: attr_value("educationLevelType"),
           language: attr_value("inLanguage"),
+          author: nil,
           publisher: attr_value("publisher"),
           publisher_name: attr_lang_value("publisherName"),
-          rights: attr_value("rights"),
+          concept_keyword: attr_lang_value("conceptKeyword"),
+          concept_category: attr_lang_value("conceptTerm"),
+          rights: attr_value("rights", "asn"),
           rights_holder: attr_value("rightsHolder"),
           license: attr_value("license"),
           table_of_contents: nil,
-          identifier: framework_data["ceterms:ctid"],
+          identifier: identifiers,
+          date_created: attr_value("dateCreated"),
           valid_start_date: attr_value("dateValidFrom"),
           valid_end_date: attr_value("dateValidUntil"),
           jurisdiction: nil,
@@ -40,11 +45,11 @@ module Metamodels
           return nil
         end
 
-        attr_value(key)[language_code]
+        attr_value(key).values.first
       end
 
-      def attr_value(key)
-        framework_data["ceasn:%s" % key]
+      def attr_value(key, prefix = "ceasn")
+        framework_data["%s:%s" % [prefix, key]]
       end
 
       def framework_data
@@ -53,8 +58,11 @@ module Metamodels
         end
       end
 
-      def language_code
-        "en-us"
+      def identifiers
+        [
+          attr_value("ctid", "ceterms"),
+          attr_value("identifier"),
+        ].compact
       end
 
       def competencies

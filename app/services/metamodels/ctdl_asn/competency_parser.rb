@@ -11,20 +11,24 @@ module Metamodels
         {
           identifier: attr_value("identifier"),
           code: attr_value("codedNotation"),
-          label: attr_lang_value("competencyCategory"),
+          alternative_code: nil,
+          label: nil,
           alternative_label: nil,
           name: attr_lang_value("competencyLabel"),
           competency_text: attr_lang_value("competencyText"),
           abbreviated_competency_text: nil,
           comment: nil,
           competency_category: attr_lang_value("competencyCategory"),
-          concept_keyword: attr_value("conceptKeyword"),
+          concept_keyword: attr_lang_value("conceptKeyword"),
+          cirruculum_subject: nil,
           education_level: attr_value("educationLevelType"),
           complexity_level: attr_value("complexityLevel"),
           language: attr_value("inLanguage"),
           list_id: attr_value("listID"),
           creator: attr_value("author"),
           subject: nil,
+          license: nil,
+          weight: attr_value("weight"),
           derived_from: attr_value("derivedFrom"),
           comprised_of: attr_value("comprisedOf"),
           skill_embodied: attr_value("skillEmbodied"),
@@ -45,15 +49,18 @@ module Metamodels
           return nil
         end
 
-        attr_value(key)[language_code]
+        attr_value(key).values.first
       end
 
-      def attr_value(key)
-        competency_data["ceasn:%s" % key]
+      def attr_value(key, prefix = "ceasn")
+        competency_data["%s:%s" % [prefix, key]]
       end
 
-      def language_code
-        "en-us"
+      def identifiers
+        [
+          attr_value("ctid", "ceterms"),
+          attr_value("identifier"),
+        ].compact
       end
     end
   end

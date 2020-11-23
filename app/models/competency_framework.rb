@@ -6,17 +6,29 @@ COMPETENCY_FRAMEWORK_ATTRIBUTES = [
     key: :description,
     label: "Description",
   }, {
+    key: :cirruculum_subject,
+    label: "Cirruculum Subject",
+  }, {
     key: :education_level,
     label: "Education Level",
   }, {
     key: :language,
     label: "Language",
   }, {
+    key: :author,
+    label: "Author",
+  }, {
     key: :publisher,
     label: "Publisher",
   }, {
     key: :publisher_name,
     label: "Publisher Name",
+  }, {
+    key: :concept_keyword,
+    label: "Concept Keyword",
+  }, {
+    key: :concept_category,
+    label: "Concept Category",
   }, {
     key: :rights,
     label: "Rights",
@@ -32,6 +44,9 @@ COMPETENCY_FRAMEWORK_ATTRIBUTES = [
   }, {
     key: :identifier,
     label: "Identifier",
+  }, {
+    key: :date_created,
+    label: "Date Created",
   }, {
     key: :valid_start_date,
     label: "Valid Start Date",

@@ -33,6 +33,9 @@ COMPETENCY_ATTRIBUTES = [
     key: :concept_keyword,
     label: "Concept Keyword",
   }, {
+    key: :cirruculum_subject,
+    label: "Cirruculum Subject",
+  }, {
     key: :education_level,
     label: "Education Level",
   }, {
@@ -50,6 +53,12 @@ COMPETENCY_ATTRIBUTES = [
   }, {
     key: :subject,
     label: "Subject",
+  }, {
+    key: :license,
+    label: "License",
+  }, {
+    key: :weight,
+    label: "Weight",
   }, {
     key: :derived_from,
     label: "Derived From",
