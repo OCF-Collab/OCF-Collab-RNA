@@ -2,12 +2,18 @@ class CompetencyFrameworksController < ApplicationController
   def index
     if params[:query].present?
       @query = params[:query]
-      @competency_frameworks_metadata = CompetencyFrameworksSearch.new(query: params[:query]).competency_frameworks_metadata
+      @competency_frameworks_metadata = CompetencyFrameworksSearch.new(
+        tenant: current_tenant,
+        query: params[:query],
+      ).competency_frameworks_metadata
     end
   end
 
   def show
-    fetcher = CompetencyFrameworkFetcher.new(id: params[:id])
+    fetcher = CompetencyFrameworkFetcher.new(
+      tenant: current_tenant,
+      id: params[:id],
+    )
 
     @competency_framework_metadata = fetcher.competency_framework_metadata
     @competency_framework = fetcher.competency_framework
@@ -15,7 +21,11 @@ class CompetencyFrameworksController < ApplicationController
   end
 
   def download
-    fetcher = CompetencyFrameworkFetcher.new(id: params[:id], requested_metamodel: params[:metamodel])
+    fetcher = CompetencyFrameworkFetcher.new(
+      tenant: current_tenant,
+      id: params[:id],
+      requested_metamodel: params[:metamodel],
+    )
 
     base_filename = params[:id].split("/").last.split(".").first
     extension = MIME::Types[fetcher.content_type].first.extensions.first

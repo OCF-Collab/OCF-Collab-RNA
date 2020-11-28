@@ -22,4 +22,8 @@ module Multitenancy
   def tenant_token
     params[:token] || session[:tenant_token]
   end
+
+  def current_tenant
+    @current_tenant
+  end
 end

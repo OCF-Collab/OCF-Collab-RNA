@@ -3,14 +3,17 @@ require "cgi"
 class CompetencyFrameworkMetadataFetcher
   METADATA_PATH = "/api/competency_frameworks"
 
-  attr_reader :id
+  attr_reader :tenant, :id
 
-  def initialize(id:)
+  def initialize(tenant:, id:)
+    @tenant = tenant
     @id = id
   end
 
   def competency_framework_metadata
-    @competency_framework_metadata = CompetencyFrameworkMetadataParser.new(framework_metadata: framework_metadata).competency_framework_metadata
+    @competency_framework_metadata = CompetencyFrameworkMetadataParser.new(
+      framework_metadata: framework_metadata
+    ).competency_framework_metadata
   end
 
   def framework_metadata
@@ -30,7 +33,7 @@ class CompetencyFrameworkMetadataFetcher
   end
 
   def oauth2_client
-    OCFCollabClient
+    @oauth2_client ||= TenantOauth2Client.new(tenant: tenant)
   end
 
   def path
