@@ -1,7 +1,7 @@
 module CompetencyFrameworkDisplayHelper
   def display_attribute_value(value)
     if value.is_a?(Array) && value.size == 1
-      display_attribute_value(value.first)
+      return display_attribute_value(value.first)
     end
 
     if value.is_a?(Hash)
