@@ -1,5 +1,5 @@
 class CompetencyFrameworksSearch
-  SEARCH_PATH = "/api/competency_frameworks/search"
+  SEARCH_PATH = "/competency_frameworks/search"
 
   attr_reader :tenant, :query
 

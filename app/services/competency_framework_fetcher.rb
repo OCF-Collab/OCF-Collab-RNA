@@ -1,7 +1,7 @@
 require "cgi"
 
 class CompetencyFrameworkFetcher
-  COMPETENCY_FRAMEWORKS_PATH = "/api/competency_frameworks"
+  ASSET_FILE_PATH = "/competency_frameworks/asset_file"
 
   attr_reader :tenant, :id, :requested_metamodel
 
@@ -44,18 +44,12 @@ class CompetencyFrameworkFetcher
   end
 
   def path
-    "%s/%s/asset_file" % [
-      COMPETENCY_FRAMEWORKS_PATH,
-      CGI.escape(id),
-    ]
+    ASSET_FILE_PATH
   end
 
   def params
-    if requested_metamodel.blank?
-      return nil
-    end
-
     {
+      id: id,
       metamodel: requested_metamodel,
     }
   end

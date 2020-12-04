@@ -1,7 +1,7 @@
 require "cgi"
 
 class CompetencyFrameworkMetadataFetcher
-  METADATA_PATH = "/api/competency_frameworks"
+  METADATA_PATH = "/competency_frameworks/metadata"
 
   attr_reader :tenant, :id
 
@@ -25,7 +25,7 @@ class CompetencyFrameworkMetadataFetcher
   end
 
   def response
-    @response ||= oauth2_token.get(path)
+    @response ||= oauth2_token.get(path, params: params)
   end
 
   def oauth2_token
@@ -37,9 +37,12 @@ class CompetencyFrameworkMetadataFetcher
   end
 
   def path
-    "%s/%s" % [
-      METADATA_PATH,
-      CGI.escape(id),
-    ]
+    METADATA_PATH
+  end
+
+  def params
+    {
+      id: id,
+    }
   end
 end
