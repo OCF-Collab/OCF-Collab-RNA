@@ -5,6 +5,7 @@ services:
     command: bash -c "bundle install && rm -f tmp/pids/server.pid && bundle exec rails s -p 3005 -b '0.0.0.0'"
     env_file:
       - .env.development
+      - .env.docker
     volumes:
       - .:/app
       - bundle:/usr/local/bundle
@@ -13,13 +14,26 @@ services:
       - ocf_collab
     ports:
       - 3005:3005
+    depends_on:
+      - rna-db
     stdin_open: true
     tty: true
+  rna-db:
+    image: postgres:12.4-alpine
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    expose:
+      - 5432
+    networks:
+      - ocf_collab
+    volumes:
+      - postgres:/var/lib/postgresql/data
 
 networks:
   ocf_collab:
     name: ocf_collab
 
 volumes:
+  postgres:
   bundle:
   node_modules:

@@ -1,9 +1,10 @@
 class CompetencyFrameworksSearch
-  SEARCH_PATH = "/api/competency_frameworks/search"
+  SEARCH_PATH = "/competency_frameworks/search"
 
-  attr_reader :query
+  attr_reader :tenant, :query
 
-  def initialize(query:)
+  def initialize(tenant:, query:)
+    @tenant = tenant
     @query = query
   end
 
@@ -26,14 +27,12 @@ class CompetencyFrameworksSearch
   end
 
   def oauth2_client
-    OCFCollabClient
+    @oauth2_client ||= TenantOauth2Client.new(tenant: tenant)
   end
 
   def params
     {
-      search: {
-        query: query,
-      }
+      query: query,
     }
   end
 end

@@ -1,11 +1,12 @@
 require "cgi"
 
 class CompetencyFrameworkFetcher
-  COMPETENCY_FRAMEWORKS_PATH = "/api/competency_frameworks"
+  ASSET_FILE_PATH = "/competency_frameworks/asset_file"
 
-  attr_reader :id, :requested_metamodel
+  attr_reader :tenant, :id, :requested_metamodel
 
-  def initialize(id:, requested_metamodel: nil)
+  def initialize(tenant:, id:, requested_metamodel: nil)
+    @tenant = tenant
     @id = id
     @requested_metamodel = requested_metamodel
   end
@@ -39,22 +40,16 @@ class CompetencyFrameworkFetcher
   end
 
   def oauth2_client
-    OCFCollabClient
+    @oauth2_client ||= TenantOauth2Client.new(tenant: tenant)
   end
 
   def path
-    "%s/%s/asset_file" % [
-      COMPETENCY_FRAMEWORKS_PATH,
-      CGI.escape(id),
-    ]
+    ASSET_FILE_PATH
   end
 
   def params
-    if requested_metamodel.blank?
-      return nil
-    end
-
     {
+      id: id,
       metamodel: requested_metamodel,
     }
   end
@@ -72,6 +67,9 @@ class CompetencyFrameworkFetcher
   end
 
   def competency_framework_metadata
-    @competency_framework_metadata ||= CompetencyFrameworkMetadataFetcher.new(id: id).competency_framework_metadata
+    @competency_framework_metadata ||= CompetencyFrameworkMetadataFetcher.new(
+      tenant: tenant,
+      id: id,
+    ).competency_framework_metadata
   end
 end
