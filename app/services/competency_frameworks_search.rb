@@ -32,9 +32,7 @@ class CompetencyFrameworksSearch
 
   def params
     {
-      search: {
-        query: query,
-      }
+      query: query,
     }
   end
 end
