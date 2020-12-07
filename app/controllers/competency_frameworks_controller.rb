@@ -2,10 +2,11 @@ class CompetencyFrameworksController < ApplicationController
   def index
     if params[:query].present?
       @query = params[:query]
-      @competency_frameworks_metadata = CompetencyFrameworksSearch.new(
+      @search = CompetencyFrameworksSearch.new(
         tenant: current_tenant,
         query: params[:query],
-      ).competency_frameworks_metadata
+        page: params[:page]&.to_i,
+      )
     end
   end
 
