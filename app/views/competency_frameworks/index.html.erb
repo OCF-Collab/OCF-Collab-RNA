@@ -4,7 +4,11 @@
 
 <div class="mt-3">
   <% if @query.present? %>
-    <%= render partial: "results", locals: { results: @competency_frameworks_metadata } %>
+    <%=
+      render partial: "results", locals: {
+        search: @search,
+      }
+    %>
   <% else %>
     <%= render partial: "no_query" %>
   <% end %>
