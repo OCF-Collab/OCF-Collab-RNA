@@ -3,7 +3,7 @@ require "delegate"
 class TenantOauth2Client < Delegator
   CONNECTION_OPTIONS = {
     request: {
-      timeout: 120,
+      timeout: 600,
     }
   }
 
