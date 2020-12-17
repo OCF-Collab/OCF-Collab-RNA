@@ -3,6 +3,7 @@ class MetamodelInterchangeNotice {
     this.actionsElement = actionsElement;
 
     this.handleInterchangeClick = this.handleInterchangeClick.bind(this);
+    this.hideTooltip = this.hideTooltip.bind(this);
 
     this.init();
   }
@@ -45,6 +46,11 @@ class MetamodelInterchangeNotice {
 
   showTooltip() {
     this.tooltip.show();
+    setTimeout(this.hideTooltip, 5000);
+  }
+
+  hideTooltip() {
+    this.tooltip.hide();
   }
 
   showSpinner() {
