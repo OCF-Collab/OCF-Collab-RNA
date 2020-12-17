@@ -9,9 +9,12 @@
 
   <% framework_metamodel = available_metamodels.find { |m| m[:concept_url] == competency_framework_metadata.provider_meta_model } %>
 
-  <div class="actions">
-    <div class="btn-group" role="group">
-      <a href="<%= download_competency_framework_url(competency_framework_metadata.id) %>" class="btn btn-info">Export as <%= framework_metamodel[:label] %></a>
+  <div id="framework-actions" class="actions">
+    <div class="btn-group" role="group" title="Transforming competency framework might take several minutes">
+      <a href="<%= download_competency_framework_url(competency_framework_metadata.id) %>" class="btn btn-info export-button">
+        <div class="spinner-border spinner-border-sm" role="status"></div>
+        <span>Export as <%= framework_metamodel[:label] %></span>
+      </a>
       <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span class="sr-only">Select metamodel</span>
       </button>

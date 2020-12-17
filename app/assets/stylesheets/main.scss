@@ -138,18 +138,31 @@ html {
   .actions {
     border-top: 1px solid $gray-300;
     padding: 1.5rem 0.75rem 0.75rem;
+
+    .long-export-notice {
+      display: inline-block;
+    }
   }
 
-  .download-framework {
+  .export-button {
     position: relative;
 
+    span, .spinner-border {
+      transition: opacity 0.5s;
+    }
+
     .spinner-border {
-      display: none;
       position: absolute;
       left: 50%;
       top: 50%;
       margin-left: -0.5rem;
       margin-top: -0.5rem;
+      opacity: 0;
     }
   }
+}
+
+
+.tooltip-inner {
+  max-width: 240px;
 }
