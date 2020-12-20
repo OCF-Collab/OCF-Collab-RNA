@@ -1,24 +1,27 @@
-# README
+# Requester Node Agent
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The purpose of Requester Node Agent (RNA) service within OCF Collab network is to expose an end user interface that enables search, retrieval and display of competency frameworks.
 
-Things you may want to cover:
+While nodes are expected to implement their own RNAs within own infrastrucutre the network provides one to lower onboarding friction.
 
-* Ruby version
+## Setup
 
-* System dependencies
+### Environment variblaes
 
-* Configuration
+#### `OCF_COLLAB_URL` 
 
-* Database creation
+Root URL of Request Broker service.
 
-* Database initialization
+### Tenants
 
-* How to run the test suite
+In order to identify specific nodes using the RNA it supports multi-tenancy in a form of allowing using different OAuth client credentials when calling Request Broker.
 
-* Services (job queues, cache servers, search engines, etc.)
+Different nodes are represented by `Tenant` model within the service. It contains name and OAuth client credentials.
 
-* Deployment instructions
+`Tenant` can have multiple `TenantToken` records to allow seamless rotation when needed. The tokens allow to specify which tenant should be used when loading the application.
 
-* ...
+Once `Tenant` and corresponding `TenantToken` are created, open the application with `token` GET parameter containing created token. The token will be stored in a session for subsequent page views.
+
+#### Default tenant
+
+To allow using the application without providing a token create a `Tenant` with `default` attribute set to `true`.
