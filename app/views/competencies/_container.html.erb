@@ -1,0 +1,19 @@
+<li class="media p-3 border-bottom">
+  <div class="media-body">
+    <h6>
+      <%= link_to container.fetch("title"), competency_framework_path(id: container.fetch("id")), target: "_blank" %>
+    </h6>
+    <ol>
+      <% container.fetch("competencies").each do |competency| %>
+        <li>
+          <% if competency.fetch("external_id") %>
+          <%= link_to competency.fetch("competency_text"), competency_path(id: competency.fetch("external_id")) %>
+          <% else %>
+          <%= competency.fetch("competency_text") %>
+          <% end %>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+  <%= image_tag container.fetch("attributionLogoUrl"), alt: container.fetch("attributionName"), class: "ml-3", height: 30 %>
+</li>
