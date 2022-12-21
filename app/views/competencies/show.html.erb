@@ -1,0 +1,25 @@
+<% content_for :title, @competency.fetch("Competency Text") %>
+
+<div class="row justify-content-center">
+  <div class="col col-lg-6">
+    <div class="details-view bg-white rounded shadow-sm">
+      <div class="details">
+        <h6>Competency details</h6>
+        <div class="table-wrapper">
+          <table class="table">
+            <tbody>
+            <% @competency.each do |key, value| %>
+              <tr>
+                <th><%= key %></th>
+                <td>
+                  <%= display_attribute_value(value) %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
