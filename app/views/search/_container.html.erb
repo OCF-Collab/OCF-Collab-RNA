@@ -5,19 +5,25 @@
     </h6>
 
     <% if container.fetch("description").present? %>
-    <div class="media-body text-muted small">
+    <div class="mb-2 small text-muted">
       <%= truncate(container.fetch("description"), length: 300) %>
     </div>
     <% end %>
 
+    <p>
+      <%= render "hit_score", value: container.fetch("hitScore") %>
+      <%= link_to "Beneficiary Rights", container.fetch("beneficiaryRights"), target: "_blank" %>
+    </p>
+
     <ol>
       <% container.fetch("competencies", []).each do |competency| %>
-        <li>
+        <li class="mb-2">
           <% if competency.fetch("external_id") %>
           <%= link_to competency.fetch("competency_text"), competency_path(id: competency.fetch("external_id")), target: "blank" %>
           <% else %>
           <%= competency.fetch("competency_text") %>
           <% end %>
+          <%= render "hit_score", value: competency.fetch("hit_score") %>
         </li>
       <% end %>
     </ol>

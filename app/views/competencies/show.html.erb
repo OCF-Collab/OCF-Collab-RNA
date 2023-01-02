@@ -1,14 +1,23 @@
-<% content_for :title, @competency.fetch("Competency Text") %>
+<% content_for :title, @competency.dig("metadata", "title") %>
 
 <div class="row justify-content-center">
   <div class="col col-lg-6">
+    <div class="media mb-3 px-2">
+      <div class="media-body">
+        <h1><%= @competency.dig("metadata", "title") %></h1>
+        <%= link_to "View Original Data", params.fetch(:id), target: "_blank" %>
+      </div>
+      <%= image_tag @competency.dig("metadata", "logo_url"), alt: @competency.dig("metadata", "provider_name"), class: "align-self-start ml-3", width: 100 %>
+    </div>
+
     <div class="details-view bg-white rounded shadow-sm">
       <div class="details">
         <h6>Competency details</h6>
+
         <div class="table-wrapper">
           <table class="table">
             <tbody>
-            <% @competency.each do |key, value| %>
+            <% @competency.fetch("properties").each do |key, value| %>
               <tr>
                 <th><%= key %></th>
                 <td>
