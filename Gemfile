@@ -16,7 +16,6 @@ gem 'pg'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '~> 1.13', require: false
 
-gem 'jquery-rails', '~> 4.5'
 gem 'bootstrap', '~> 5.2'
 gem 'oauth2', '1.4.4'
 gem 'mime-types'

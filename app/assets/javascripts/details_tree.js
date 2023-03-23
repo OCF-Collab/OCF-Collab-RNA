@@ -124,7 +124,7 @@ class DetailsTree {
   }
 }
 
-$(document).ready(function() {
+document.addEventListener("DOMContentLoaded", function() {
   const treeElement = document.getElementById("tree-view");
   const detailsElement = document.getElementById("details-view");
 
