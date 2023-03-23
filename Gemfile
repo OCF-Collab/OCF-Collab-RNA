@@ -17,7 +17,7 @@ gem 'pg'
 gem 'bootsnap', '~> 1.13', require: false
 
 gem 'jquery-rails', '~> 4.5'
-gem 'bootstrap', '4.5.2'
+gem 'bootstrap', '~> 5.2'
 gem 'oauth2', '1.4.4'
 gem 'mime-types'
 

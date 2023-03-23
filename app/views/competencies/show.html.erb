@@ -7,7 +7,7 @@
         <h1><%= @competency.dig("metadata", "title") %></h1>
         <%= link_to "View Original Data", params.fetch(:id), target: "_blank" %>
       </div>
-      <%= image_tag @competency.dig("metadata", "logo_url"), alt: @competency.dig("metadata", "provider_name"), class: "align-self-start ml-3", width: 100 %>
+      <%= image_tag @competency.dig("metadata", "logo_url"), alt: @competency.dig("metadata", "provider_name"), class: "align-self-start ms-3", width: 100 %>
     </div>
 
     <div class="details-view bg-white rounded shadow-sm">
