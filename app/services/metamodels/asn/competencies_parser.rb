@@ -18,11 +18,11 @@ module Metamodels
       end
 
       def root_competency_ids
-        framework_data[HAS_CHILD_KEY].map { |v| v["value"] }
+        container_data[HAS_CHILD_KEY].map { |v| v["value"] }
       end
 
-      def framework_data
-        @framework_data ||= body.values.find do |item|
+      def container_data
+        @container_data ||= body.values.find do |item|
           item.has_key?(FRAMEWORK_TYPE_KEY) &&
             item[FRAMEWORK_TYPE_KEY].first["value"] == FRAMEWORK_TYPE_VALUE
         end

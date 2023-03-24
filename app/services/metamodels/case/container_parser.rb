@@ -1,17 +1,17 @@
 module Metamodels
   module Case
-    class FrameworkParser
+    class ContainerParser
       attr_reader :body
 
       def initialize(body:)
         @body = body
       end
 
-      def competency_framework
-        CompetencyFramework.new(framework_attributes)
+      def container
+        Container.new(container_attributes)
       end
 
-      def framework_attributes
+      def container_attributes
         {
           title: attr_value("title"),
           description: attr_value("description"),
@@ -41,10 +41,10 @@ module Metamodels
       end
 
       def attr_value(key)
-        framework_data[key]
+        container_data[key]
       end
 
-      def framework_data
+      def container_data
         body["CFDocument"]
       end
 

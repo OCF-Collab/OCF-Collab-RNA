@@ -1,7 +1,7 @@
 require "cgi"
 
-class CompetencyFrameworkMetadataFetcher
-  METADATA_PATH = "/competency_frameworks/metadata"
+class ContainerMetadataFetcher
+  METADATA_PATH = "/containers/metadata"
 
   attr_reader :tenant, :id
 
@@ -10,14 +10,10 @@ class CompetencyFrameworkMetadataFetcher
     @id = id
   end
 
-  def competency_framework_metadata
-    @competency_framework_metadata = CompetencyFrameworkMetadataParser.new(
-      framework_metadata: framework_metadata
-    ).competency_framework_metadata
-  end
-
-  def framework_metadata
-    response_data
+  def container_metadata
+    @container_metadata ||= ContainerMetadataParser
+      .new(body: response_data)
+      .container_metadata
   end
 
   def response_data

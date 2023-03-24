@@ -1,6 +1,6 @@
 module Metamodels
   module Asn
-    class FrameworkParser
+    class ContainerParser
       FRAMEWORK_TYPE_KEY = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
       FRAMEWORK_TYPE_VALUE = "http://purl.org/ASN/schema/core/StandardDocument"
       SCHEMA_URLS = {
@@ -16,11 +16,11 @@ module Metamodels
         @body = body
       end
 
-      def competency_framework
-        CompetencyFramework.new(framework_attributes)
+      def container
+        Container.new(container_attributes)
       end
 
-      def framework_attributes
+      def container_attributes
         {
           title: attr_value(:dcelements, "title"),
           description: attr_value(:dcterms, "description"),
@@ -54,9 +54,9 @@ module Metamodels
       end
 
       def list_attr_value(schema, key)
-        return nil unless framework_data.has_key?(attribute(schema, key))
+        return nil unless container_data.has_key?(attribute(schema, key))
 
-        framework_data[attribute(schema, key)].map { |v| v["value"] }
+        container_data[attribute(schema, key)].map { |v| v["value"] }
       end
 
       def attribute(schema, key)
@@ -67,8 +67,8 @@ module Metamodels
       end
 
 
-      def framework_data
-        @framework_data ||= body.values.find do |item|
+      def container_data
+        @container_data ||= body.values.find do |item|
           item.has_key?(FRAMEWORK_TYPE_KEY) &&
             item[FRAMEWORK_TYPE_KEY].first["value"] == FRAMEWORK_TYPE_VALUE
         end

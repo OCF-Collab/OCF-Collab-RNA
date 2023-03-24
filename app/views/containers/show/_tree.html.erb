@@ -1,0 +1,23 @@
+<div class="competency-tree">
+  <ul class="list-unstyled">
+    <li class="container-item">
+      <div class="container-header">
+        <%= render partial: "containers/show/container_header", locals: { container: container, container_metadata: container_metadata } %>
+      </div>
+
+      <div class="details">
+        <%= render partial: "containers/show/container_details", locals: { container: container, container_metadata: container_metadata, available_metamodels: available_metamodels } %>
+      </div>
+
+      <h6>
+        Competencies
+        <% if container.hierarchical? %>
+          <small class="float-end">(<a href="#" class="expand-all">Expand all</a> / <a href="#" class="collapse-all">Collapse all</a>)</small>
+        <% end %>
+      </h6>
+      <ul class="competencies list-unstyled">
+        <%= render partial: "containers/show/tree_item", collection: container.competencies, as: :competency %>
+      </ul>
+    </li>
+  </ul>
+</div>

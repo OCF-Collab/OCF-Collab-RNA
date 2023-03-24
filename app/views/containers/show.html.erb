@@ -1,0 +1,12 @@
+<% content_for :title, @container[:title] %>
+
+<div class="row">
+  <div class="col col-7">
+    <div id="tree-view">
+      <%= render partial: "containers/show/tree", locals: { container: @container, container_metadata: @container_metadata, available_metamodels: @available_metamodels } %>
+    </div>
+  </div>
+  <div class="col col-5">
+    <div class="details-view bg-white rounded shadow-sm" id="details-view"></div>
+  </div>
+</div>

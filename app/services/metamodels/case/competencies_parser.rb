@@ -14,10 +14,10 @@ module Metamodels
       end
 
       def root_competency_ids
-        children_ids(framework_identifier)
+        children_ids(container_identifier)
       end
 
-      def framework_identifier
+      def container_identifier
         body["CFDocument"]["identifier"]
       end
 

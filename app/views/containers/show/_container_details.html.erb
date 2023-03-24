@@ -1,0 +1,28 @@
+<h6>Container details</h6>
+
+<div class="table-wrapper">
+  <table class="table">
+    <tbody>
+      <%= render partial: "containers/show/details_attribute", collection: CONTAINER_ATTRIBUTES, as: :attribute, locals: { object: container } %>
+    </tbody>
+  </table>
+
+  <% container_metamodel = available_metamodels.find { |m| m[:concept_url] == container_metadata.provider_meta_model } %>
+
+  <div id="container-actions" class="actions">
+    <div class="btn-group" role="group" title="Transforming competency container might take from 30 seconds to several minutes">
+      <a href="<%= download_container_url(container_metadata.id) %>" class="btn btn-info export-button">
+        <div class="spinner-border spinner-border-sm" role="status"></div>
+        <span>Export as <%= container_metamodel[:label] %></span>
+      </a>
+      <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="sr-only">Select metamodel</span>
+      </button>
+      <div class="dropdown-menu">
+        <% (available_metamodels - [container_metamodel]).each do |metamodel| %>
+          <a href="<%= download_container_url(container_metadata.id, metamodel: metamodel[:concept_url]) %>" class="dropdown-item"><%= metamodel[:label] %></a>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-CompetencyFrameworkMetadata = Struct.new(
+ContainerMetadata = Struct.new(
   :id,
   :title,
   :description,

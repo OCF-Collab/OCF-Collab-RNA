@@ -1,0 +1,13 @@
+<li class="media p-3 border-bottom">
+  <div class="media-body">
+    <h6>
+      <%= link_to container.title, container_path(id: container.id), target: "_blank" %>
+    </h6>
+    <% if container.description.present? %>
+      <div class="media-body text-muted small">
+        <%= truncate(container.description, length: 300) %>
+      </div>
+    <% end %>
+  </div>
+  <%= image_tag container.attribution_logo_url, class: "ms-3 align-self-center", height: 30, alt: container.attribution_name %>
+</li>

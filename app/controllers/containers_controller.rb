@@ -1,8 +1,8 @@
-class CompetencyFrameworksController < ApplicationController
+class ContainersController < ApplicationController
   def index
     if params[:query].present?
       @query = params[:query]
-      @search = CompetencyFrameworksSearch.new(
+      @search = ContainersSearch.new(
         tenant: current_tenant,
         query: params[:query],
         page: params[:page]&.to_i,
@@ -11,18 +11,18 @@ class CompetencyFrameworksController < ApplicationController
   end
 
   def show
-    fetcher = CompetencyFrameworkFetcher.new(
+    fetcher = ContainerFetcher.new(
       tenant: current_tenant,
       id: params[:id],
     )
 
-    @competency_framework_metadata = fetcher.competency_framework_metadata
-    @competency_framework = fetcher.competency_framework
+    @container_metadata = fetcher.container_metadata
+    @container = fetcher.container
     @available_metamodels = Metamodels::METAMODELS
   end
 
   def download
-    fetcher = CompetencyFrameworkFetcher.new(
+    fetcher = ContainerFetcher.new(
       tenant: current_tenant,
       id: params[:id],
       requested_metamodel: params[:metamodel],

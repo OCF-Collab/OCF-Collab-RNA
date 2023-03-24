@@ -4,7 +4,7 @@ class DetailsTree {
     this.detailsElement = detailsElement;
     this.selectedCompetencyElement = null;
 
-    this.handleFrameworkDetailsToggleClick = this.handleFrameworkDetailsToggleClick.bind(this);
+    this.handleContainerDetailsToggleClick = this.handleContainerDetailsToggleClick.bind(this);
     this.handleDetailsToggleClick = this.handleDetailsToggleClick.bind(this);
     this.handleCollapseToggleClick = this.handleCollapseToggleClick.bind(this);
     this.handleExpandAllClick = this.handleExpandAllClick.bind(this);
@@ -13,11 +13,11 @@ class DetailsTree {
 
   init() {
     this.bindEvents();
-    this.selectFramework();
+    this.selectContainer();
   }
 
   bindEvents() {
-    this.frameworkDetailsToggleElement().addEventListener("click", this.handleFrameworkDetailsToggleClick);
+    this.containerDetailsToggleElement().addEventListener("click", this.handleContainerDetailsToggleClick);
 
     this.detailsToggleElements().forEach((toggleElement) => {
       toggleElement.addEventListener("click", this.handleDetailsToggleClick);
@@ -33,33 +33,33 @@ class DetailsTree {
     }
   }
 
-  frameworkDetailsToggleElement() {
-    return this.treeElement.querySelector(".framework-header");
+  containerDetailsToggleElement() {
+    return this.treeElement.querySelector(".container-header");
   }
 
-  handleFrameworkDetailsToggleClick(event) {
-    this.selectFramework();
+  handleContainerDetailsToggleClick(event) {
+    this.selectContainer();
   }
 
-  selectFramework() {
-    const frameworkDetailsElement = this.frameworkElement().querySelector(".details");
-    const frameworkDetailsElementClone = frameworkDetailsElement.cloneNode(true);
+  selectContainer() {
+    const containerDetailsElement = this.containerElement().querySelector(".details");
+    const containerDetailsElementClone = containerDetailsElement.cloneNode(true);
 
     this.detailsElement.innerHTML = "";
-    this.detailsElement.append(frameworkDetailsElementClone);
+    this.detailsElement.append(containerDetailsElementClone);
 
     if (this.selectedCompetencyElement) {
       this.selectedCompetencyElement.classList.remove("selected");
       this.selectedCompetencyElement = null;
     }
 
-    this.frameworkElement().classList.add("selected");
+    this.containerElement().classList.add("selected");
 
-    const notice = new MetamodelInterchangeNotice(frameworkDetailsElementClone.querySelector("#framework-actions"));
+    const notice = new MetamodelInterchangeNotice(containerDetailsElementClone.querySelector("#container-actions"));
   }
 
-  frameworkElement() {
-    return this.treeElement.querySelector(".framework-item");
+  containerElement() {
+    return this.treeElement.querySelector(".container-item");
   }
 
   detailsToggleElements() {
@@ -74,7 +74,7 @@ class DetailsTree {
     this.detailsElement.innerHTML = "";
     this.detailsElement.append(competencyDetailsElement.cloneNode(true));
 
-    this.frameworkElement().classList.remove("selected");
+    this.containerElement().classList.remove("selected");
 
     if (this.selectedCompetencyElement) {
       this.selectedCompetencyElement.classList.remove("selected");

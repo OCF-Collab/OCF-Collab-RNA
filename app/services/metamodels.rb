@@ -3,15 +3,15 @@ module Metamodels
     {
       label: "CTDL-ASN",
       concept_url: "https://ocf-collab.org/concepts/f9a2b710-1cc4-4065-85fd-596b3c40906c",
-      framework_parser: Metamodels::CtdlAsn::FrameworkParser,
+      container_parser: Metamodels::CtdlAsn::ContainerParser,
     }, {
       label: "CASE",
       concept_url: "https://ocf-collab.org/concepts/f63b9a67-543a-49ab-b5ed-8296545c1db5",
-      framework_parser: Metamodels::Case::FrameworkParser,
+      container_parser: Metamodels::Case::ContainerParser,
     }, {
       label: "ASN",
       concept_url: "https://ocf-collab.org/concepts/6ad27cff-5832-4b3d-bd3e-892208b80cad",
-      framework_parser: Metamodels::Asn::FrameworkParser,
+      container_parser: Metamodels::Asn::ContainerParser,
     }
   ]
 
@@ -30,8 +30,8 @@ module Metamodels
       @config = config
     end
 
-    def competency_framework_parser
-      config[:framework_parser]
+    def container_parser
+      config[:container_parser]
     end
   end
 end

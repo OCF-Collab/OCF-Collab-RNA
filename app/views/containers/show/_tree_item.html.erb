@@ -34,7 +34,7 @@
 
   <% if competency.children.present? %>
     <ul class="children list-unstyled">
-      <%= render partial: "competency_frameworks/show/tree_item", collection: competency.children, as: :competency %>
+      <%= render partial: "containers/show/tree_item", collection: competency.children, as: :competency %>
     </ul>
   <% end %>
 </li>

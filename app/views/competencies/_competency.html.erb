@@ -3,7 +3,7 @@
 <li class="media p-3 border-bottom">
   <div class="media-body">
     <h6>
-      <%= link_to container.fetch("title"), competency_framework_path(id: container.fetch("id")), target: "_blank" %>
+      <%= link_to container.fetch("title"), container_path(id: container.fetch("id")), target: "_blank" %>
     </h6>
     <%= link_to competency.fetch("competency_text"), competency_path(id: competency.fetch("external_id")), target: "_blank" %>
   </div>

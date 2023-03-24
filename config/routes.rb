@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :competencies, only: :show, constraints: { id: /.*/ }
 
-  resources :competency_frameworks,
+  resources :containers,
     only: [:index, :show],
     format: false,
     defaults: { format: "html" },

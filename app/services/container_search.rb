@@ -1,5 +1,5 @@
-class CompetencyFrameworksSearch
-  SEARCH_PATH = "/competency_frameworks/search"
+class ContainersSearch
+  SEARCH_PATH = "/containers/search"
   PER_PAGE = 10
 
   attr_reader :tenant, :query, :page
@@ -10,9 +10,9 @@ class CompetencyFrameworksSearch
     @page = page
   end
 
-  def competency_frameworks_metadata
-    @competency_frameworks_metadata ||= search_data["results"].map do |result|
-      CompetencyFrameworkMetadataParser.new(framework_metadata: result).competency_framework_metadata
+  def containers_metadata
+    @containers_metadata ||= search_data["results"].map do |result|
+      ContainerMetadataParser.new(container_metadata: result).container_metadata
     end
   end
 

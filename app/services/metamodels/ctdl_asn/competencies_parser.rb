@@ -26,12 +26,12 @@ module Metamodels
       end
 
       def root_competency_ids
-        framework_data["ceasn:hasTopChild"]
+        container_data["ceasn:hasTopChild"]
       end
 
-      def framework_data
-        @framework_data ||= body["@graph"].find do |item|
-          item["@type"] == "ceasn:CompetencyFramework"
+      def container_data
+        @container_data ||= body["@graph"].find do |item|
+          ContainerParser::CONTAINER_TYPE_VALUES.include?(item["@type"])
         end
       end
 

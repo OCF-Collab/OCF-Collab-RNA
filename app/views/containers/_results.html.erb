@@ -1,7 +1,7 @@
   <h5>Displaying <%= search.total_results_count %> results</h5>
   <div class="mt-1 bg-white rounded shadow-sm">
     <ul class="list-unstyled">
-      <%= render partial: "result", collection: search.competency_frameworks_metadata, as: :competency_framework %>
+      <%= render partial: "result", collection: search.containers_metadata, as: :container %>
     </ul>
   </div>
 </div>
@@ -11,19 +11,19 @@
   <div class="col-md-auto">
     <%= link_to(
       "First page",
-      competency_frameworks_url(request.query_parameters.merge(page: 1)),
+      containers_url(request.query_parameters.merge(page: 1)),
       class: "btn btn-secondary %s" % (search.has_previous_page? ? nil : "disabled"),
     ) %>
   </div>
   <div class="col-md-auto">
     <%= link_to(
       "Previous page",
-      competency_frameworks_url(request.query_parameters.merge(page: search.previous_page)),
+      containers_url(request.query_parameters.merge(page: search.previous_page)),
       class: "btn btn-secondary %s" % (search.has_previous_page? ? nil : "disabled"),
     ) %>
     <%= link_to(
       "Next page",
-      competency_frameworks_url(request.query_parameters.merge(page: search.next_page)),
+      containers_url(request.query_parameters.merge(page: search.next_page)),
       class: "btn btn-info %s" % (search.has_next_page? ? nil : "disabled"),
     ) %>
   </div>

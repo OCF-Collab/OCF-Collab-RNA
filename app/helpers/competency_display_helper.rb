@@ -31,7 +31,7 @@ module CompetencyDisplayHelper
     url =
       case resource_type
       when "competency" then competency_path(value)
-      when "container" then competency_framework_path(value)
+      when "container" then container_path(value)
       else value
       end
 

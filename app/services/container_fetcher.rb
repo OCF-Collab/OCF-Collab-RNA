@@ -1,7 +1,7 @@
 require "cgi"
 
-class CompetencyFrameworkFetcher
-  ASSET_FILE_PATH = "/competency_frameworks/asset_file"
+class ContainerFetcher
+  ASSET_FILE_PATH = "/containers/asset_file"
 
   attr_reader :tenant, :id, :requested_metamodel
 
@@ -11,8 +11,8 @@ class CompetencyFrameworkFetcher
     @requested_metamodel = requested_metamodel
   end
 
-  def competency_framework
-    @competency_framework ||= competency_framework_parser.new(body: response_data).competency_framework
+  def container
+    @container ||= container_parser.new(body: response_data).container
   end
 
   def response_data
@@ -54,8 +54,8 @@ class CompetencyFrameworkFetcher
     }
   end
 
-  def competency_framework_parser
-    metamodel.competency_framework_parser
+  def container_parser
+    metamodel.container_parser
   end
 
   def metamodel
@@ -63,13 +63,13 @@ class CompetencyFrameworkFetcher
   end
 
   def metamodel_concept_url
-    requested_metamodel || competency_framework_metadata.provider_meta_model
+    requested_metamodel || container_metadata.provider_meta_model
   end
 
-  def competency_framework_metadata
-    @competency_framework_metadata ||= CompetencyFrameworkMetadataFetcher.new(
+  def container_metadata
+    @container_metadata ||= ContainerMetadataFetcher.new(
       tenant: tenant,
       id: id,
-    ).competency_framework_metadata
+    ).container_metadata
   end
 end

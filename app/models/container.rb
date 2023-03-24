@@ -1,4 +1,4 @@
-COMPETENCY_FRAMEWORK_ATTRIBUTES = [
+CONTAINER_ATTRIBUTES = [
   {
     key: :title,
     label: "Title",
@@ -71,8 +71,8 @@ COMPETENCY_FRAMEWORK_ATTRIBUTES = [
   },
 ]
 
-CompetencyFramework = Struct.new(
-  *COMPETENCY_FRAMEWORK_ATTRIBUTES.map { |a| a[:key] },
+Container = Struct.new(
+  *CONTAINER_ATTRIBUTES.map { |a| a[:key] },
   :competencies,
   keyword_init: true,
 ) do

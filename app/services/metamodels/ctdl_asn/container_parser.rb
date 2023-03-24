@@ -1,17 +1,19 @@
 module Metamodels
   module CtdlAsn
-    class FrameworkParser
+    class ContainerParser
+      CONTAINER_TYPE_VALUES = %w(ceasn:CompetencyFramework ceterms:Collection)
+
       attr_reader :body
 
       def initialize(body:)
         @body = body
       end
 
-      def competency_framework
-        CompetencyFramework.new(framework_attributes)
+      def container
+        Container.new(container_attributes)
       end
 
-      def framework_attributes
+      def container_attributes
         {
           title: attr_lang_value("name"),
           description: attr_lang_value("description"),
@@ -49,12 +51,12 @@ module Metamodels
       end
 
       def attr_value(key, prefix = "ceasn")
-        framework_data["%s:%s" % [prefix, key]]
+        container_data["%s:%s" % [prefix, key]]
       end
 
-      def framework_data
-        @framework_data ||= body["@graph"].find do |item|
-          item["@type"] == "ceasn:CompetencyFramework"
+      def container_data
+        @container_data ||= body["@graph"].find do |item|
+          CONTAINER_TYPE_VALUES.include?(item["@type"])
         end
       end
 

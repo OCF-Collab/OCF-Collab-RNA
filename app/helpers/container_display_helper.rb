@@ -1,4 +1,4 @@
-module CompetencyFrameworkDisplayHelper
+module ContainerDisplayHelper
   def display_attribute_value(value)
     if value.is_a?(Array) && value.size == 1
       return display_attribute_value(value.first)

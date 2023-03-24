@@ -1,6 +1,6 @@
 # Requester Node Agent
 
-The purpose of Requester Node Agent (RNA) service within OCF Collab network is to expose an end user interface that enables search, retrieval and display of competency frameworks.
+The purpose of Requester Node Agent (RNA) service within OCF Collab network is to expose an end user interface that enables search, retrieval and display of competency frameworks and collections.
 
 While nodes are expected to implement their own RNAs within own infrastrucutre the network provides one to lower onboarding friction.
 

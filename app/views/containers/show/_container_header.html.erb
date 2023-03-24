@@ -1,0 +1,12 @@
+<div class="d-flex">
+  <div class="flex-grow-1">
+    <h5>
+      <%= container.title %>
+    </h5>
+    <%= truncate(container.description, length: 200) %>
+  </div>
+
+  <div>
+    <%= image_tag container_metadata.attribution_logo_url, class: "ms-3 align-self-center", width: 100, alt: container_metadata.attribution_name %>
+  </div>
+</div>
