@@ -1,12 +1,10 @@
-<h5>Displaying <%= search.total_results_count %> results</h5>
+<h5>
+  Found <%= number_with_delimiter search.competencies_count %> competencies in <%= number_with_delimiter search.containers_count %> containers
+</h5>
 
 <div class="mt-1 bg-white rounded shadow-sm">
   <ul class="list-unstyled">
-    <% if search.container_query.present? %>
     <%= render partial: "container", collection: search.results, as: :container %>
-    <% else %>
-    <%= render partial: "competency", collection: search.results, as: :competency %>
-    <% end %>
   </ul>
 </div>
 

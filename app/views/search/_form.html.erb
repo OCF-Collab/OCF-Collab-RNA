@@ -1,14 +1,35 @@
-<%= form_for :search, url: root_path, method: :get do |f| %>
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <%= f.label :container_query, "Container" %>
-      <%= f.text_field :container_query, class: "form-control form-control-lg", name: "container_query", placeholder: "Name or URI", value: @container_query %>
-    </div>
-    <div class="form-group col-md-6">
-      <%= f.label :competency_query, "Competency" %>
-      <%= f.text_field :competency_query, class: "form-control form-control-lg", name: "competency_query", value: @competency_query %>
-    </div>
+<%= form_with model: @form, id: "search-form", method: :get, url: root_path do |f| %>
+  <div class="btn-group mb-4">
+    <% SearchForm::CONTAINER_TYPES.keys.each do |container_type| %>
+      <%= f.radio_button :container_type, container_type, class: "btn-check" %>
+      <%= f.label :container_type, class: "btn btn-outline-primary", value: container_type %>
+    <% end %>
   </div>
-  <%= f.submit "Search", class: "btn btn-info mr-2", name: nil %>
-  <%= link_to "Clear", root_path, class: "btn btn-secondary" %>
+
+  <ul class="list-unstyled">
+    <% @form.facets.each_with_index do |facet, index| %>
+      <li class="facet d-flex mb-4">
+        <%= f.fields_for "facets[]", facet do |ff| %>
+          <%= ff.select :key, SearchForm::FACETS.map { |k, v| [v, k] }, {}, class: "form-select me-3 w-25" %>
+          <%= ff.text_field :value, class: "form-control me-3", placeholder: "text" %>
+
+          <span class="d-inline-block form-check d-flex align-items-center mb-0 me-3">
+            <%= ff.check_box :optional, class: "form-check-input me-1", id: "facet-#{index}-optional", include_hidden: false %>
+            <%= ff.label :optional, class: "form-check-label text-nowrap", for: "facet-#{index}-optional" %>
+          </span>
+
+          <span class="d-flex align-items-center">
+            <%= button_tag "", class: "remove-facet btn-close", "data-role": "remove-facet", title: "Remove", type: "button" %>
+          </span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+
+  <%= button_tag "Add facet", class: "btn btn-primary", "data-role": "add-facet", type: "button" %>
+  <%= f.submit "Search", class: "btn btn-primary", name: "search" %>
+
+  <% if @error %>
+    <div class="alert alert-danger mt-4 text-center"><%= @error %></div>
+  <% end %>
 <% end %>

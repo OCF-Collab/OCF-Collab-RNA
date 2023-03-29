@@ -2,11 +2,11 @@ class Search
   SEARCH_PATH = "/search"
   PER_PAGE = 10
 
-  attr_reader :competency_query, :container_query, :tenant
+  attr_reader :container_type, :facets, :tenant
 
-  def initialize(competency_query: nil, container_query: nil, page: 1, tenant:)
-    @competency_query = competency_query
-    @container_query = container_query
+  def initialize(container_type:, facets:, page: 1, tenant:)
+    @container_type = container_type
+    @facets = facets
     @page = page
     @tenant = tenant
   end
@@ -15,18 +15,12 @@ class Search
     search_data.fetch("results")
   end
 
-  def competency_results_count
-    search_data.fetch("competency_results_count")
+  def competencies_count
+    search_data.fetch("competencies_count")
   end
 
-  def container_results_count
-    search_data.fetch("container_results_count")
-  end
-
-  def total_results_count
-    return container_results_count if container_query.present?
-
-    competency_results_count
+  def containers_count
+    search_data.fetch("containers_count")
   end
 
   def per_page
@@ -38,11 +32,11 @@ class Search
   end
 
   def has_pages?
-    total_results_count > per_page
+    containers_count > per_page
   end
 
   def has_next_page?
-    per_page * page < total_results_count
+    per_page * page < containers_count
   end
 
   def next_page
@@ -82,6 +76,6 @@ class Search
   end
 
   def params
-    { competency_query:, container_query:, page:, per_page: PER_PAGE }
+    { container_type:, facets:, page:, per_page: PER_PAGE }
   end
 end

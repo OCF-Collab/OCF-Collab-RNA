@@ -11,7 +11,6 @@
     <% end %>
 
     <p>
-      <%= render "hit_score", value: container.fetch("hitScore") %>
       <%= link_to "Beneficiary Rights", container.fetch("beneficiaryRights"), target: "_blank" %>
     </p>
 
@@ -23,7 +22,6 @@
           <% else %>
           <%= competency.fetch("competency_text") %>
           <% end %>
-          <%= render "hit_score", value: competency.fetch("hit_score") %>
         </li>
       <% end %>
     </ol>

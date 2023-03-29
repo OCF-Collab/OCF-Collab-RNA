@@ -1,13 +1,19 @@
 <% content_for :title, ["Competency Explorer"].compact.join(": ") %>
 
+<h1 class="mb-4">Competency Explorer</h1>
+
 <div class="card">
   <div class="card-body">
+    <h6 class="card-subtitle mb-4">
+      Choose the facets from the drop-down lists and enter the search term in the adjacent box.
+    </h6>
+
     <%= render "form", competency_query: @competency_query, container_query: @container_query %>
   </div>
 </div>
 
 <div class="mt-3">
-  <% if @competency_query || @container_query %>
+  <% if @search %>
     <%= render "results", search: @search %>
   <% else %>
     <%= render partial: "no_query" %>
