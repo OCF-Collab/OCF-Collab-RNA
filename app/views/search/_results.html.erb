@@ -1,35 +1,31 @@
-<h5>Displaying <%= search.total_results_count %> results</h5>
+<h5 class="mb-3">
+  Found <%= number_with_delimiter search.competencies_count %> competencies in <%= number_with_delimiter search.containers_count %> containers
+</h5>
 
-<div class="mt-1 bg-white rounded shadow-sm">
-  <ul class="list-unstyled">
-    <% if search.container_query.present? %>
-    <%= render partial: "container", collection: search.results, as: :container %>
-    <% else %>
-    <%= render partial: "competency", collection: search.results, as: :competency %>
-    <% end %>
-  </ul>
-</div>
+<ul class="list-unstyled" id="search-results">
+  <%= render partial: "container", collection: search.results, as: :container %>
+</ul>
 
 <% if search.has_pages? %>
 <div class="row justify-content-between">
-<div class="col-md-auto">
-  <%= link_to(
-    "First page",
-    root_path(request.query_parameters.merge(page: 1)),
-    class: "btn btn-secondary %s" % (search.has_previous_page? ? nil : "disabled"),
-  ) %>
-</div>
-<div class="col-md-auto">
-  <%= link_to(
-    "Previous page",
-    root_path(request.query_parameters.merge(page: search.previous_page)),
-    class: "btn btn-secondary %s" % (search.has_previous_page? ? nil : "disabled"),
-  ) %>
-  <%= link_to(
-    "Next page",
-    root_path(request.query_parameters.merge(page: search.next_page)),
-    class: "btn btn-info %s" % (search.has_next_page? ? nil : "disabled"),
-  ) %>
-</div>
+  <div class="col-md-auto">
+    <%= link_to(
+      "First page",
+      root_path(request.query_parameters.merge(page: 1)),
+      class: "btn btn-secondary %s" % (search.has_previous_page? ? nil : "disabled"),
+    ) %>
+  </div>
+  <div class="col-md-auto">
+    <%= link_to(
+      "Previous page",
+      root_path(request.query_parameters.merge(page: search.previous_page)),
+      class: "btn btn-secondary %s" % (search.has_previous_page? ? nil : "disabled"),
+    ) %>
+    <%= link_to(
+      "Next page",
+      root_path(request.query_parameters.merge(page: search.next_page)),
+      class: "btn btn-info %s" % (search.has_next_page? ? nil : "disabled"),
+    ) %>
+  </div>
 </div>
 <% end %>

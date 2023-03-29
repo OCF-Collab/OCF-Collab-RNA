@@ -1,24 +1,17 @@
 class SearchController < ApplicationController
   def index
-    @competency_query = params[:competency_query]&.squish.presence
-    @container_query = params[:container_query]&.squish.presence
+    search_form_params = params.fetch(:search_form, {})
+    @form = SearchForm.new(search_form_params)
+    return if search_form_params.empty?
 
-    if @competency_query || @container_query
+    if @form.valid?
       @search = Search.new(
-        competency_query: @competency_query,
-        container_query: @container_query,
+        **@form.to_params,
         page: params[:page],
         tenant: current_tenant
       )
-
-      if @competency_query && @container_query && @search.competency_results_count.zero?
-        search = Search.new(
-          competency_query: @competency_query,
-          tenant: current_tenant
-        )
-
-        @has_containerless_results = search.competency_results_count.positive?
-      end
+    else
+      @error = "Please enter at least one non-optional term to perform a search"
     end
   end
 end

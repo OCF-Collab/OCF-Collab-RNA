@@ -1,4 +1,4 @@
-class ContainersSearch
+class ContainerSearch
   SEARCH_PATH = "/containers/search"
   PER_PAGE = 10
 

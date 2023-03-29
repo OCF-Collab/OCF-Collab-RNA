@@ -1,32 +1,40 @@
-<li class="media p-3 border-bottom">
-  <div class="media-body">
-    <h6>
-      <%= link_to container.fetch("title"), container_path(id: container.fetch("id")), target: "_blank" %>
-    </h6>
+<li class="card d-flex mb-3">
+  <div class="card-body">
+    <%= image_tag container.fetch("attributionLogoUrl"), alt: container.fetch("attributionName"), class: "float-end", width: "75px" %>
+
+    <h5 class="card-title me-5">
+      <%= link_to container.fetch("title"), container_path(id: container.fetch("id")), class: "link-offset-2", target: "_blank" %>
+    </h5>
 
     <% if container.fetch("description").present? %>
-    <div class="mb-2 small text-muted">
+    <p class="card-text">
       <%= truncate(container.fetch("description"), length: 300) %>
-    </div>
+    </p>
     <% end %>
 
-    <p>
-      <%= render "hit_score", value: container.fetch("hitScore") %>
-      <%= link_to "Beneficiary Rights", container.fetch("beneficiaryRights"), target: "_blank" %>
-    </p>
+    <%= link_to "Beneficiary Rights", container.fetch("beneficiaryRights"), class: "card-link link-offset-2", target: "_blank" %>
 
-    <ol>
-      <% container.fetch("competencies", []).each do |competency| %>
-        <li class="mb-2">
-          <% if competency.fetch("external_id") %>
-          <%= link_to competency.fetch("competency_text"), competency_path(id: competency.fetch("external_id")), target: "blank" %>
-          <% else %>
-          <%= competency.fetch("competency_text") %>
-          <% end %>
-          <%= render "hit_score", value: competency.fetch("hit_score") %>
+    <ol class="list-group list-group-flush list-group-numbered">
+      <% container.fetch("competencies").each_with_index do |competency, index| %>
+        <li class="list-group-item d-flex justify-content-between align-items-start <%= "d-none" if index > 9 %>">
+          <div class="ms-2 me-auto">
+            <% if competency.fetch("external_id") %>
+            <%= link_to competency.fetch("competency_text"), competency_path(id: competency.fetch("external_id")), class: "link-offset-2", target: "blank" %>
+            <% else %>
+            <%= competency.fetch("competency_text") %>
+            <% end %>
+          </div>
+
+          <span class="badge bg-success font-monospace rounded-pill" title="Hit score">
+            <%= number_with_precision(competency.fetch("hit_score"), precision: 2) %>
+          </span>
         </li>
       <% end %>
     </ol>
+
+    <% if container.fetch("competencies").size > 10 %>
+    <%= link_to "Show all competencies (#{number_with_delimiter container.fetch("competencies").size})", "#", class: "card-link link-offset-2 mt-2 ms-0", "data-role": "show-all-competencies" %>
+    <%= link_to "Show first 10 competencies", "#", class: "card-link d-none link-offset-2 mt-2 ms-0", "data-role": "show-ten-competencies" %>
+    <% end %>
   </div>
-  <%= image_tag container.fetch("attributionLogoUrl"), alt: container.fetch("attributionName"), class: "ms-3", height: 30 %>
 </li>
