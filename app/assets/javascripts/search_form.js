@@ -9,14 +9,7 @@ class SearchForm {
     const facet = this.element.querySelector(".facet");
     const newFacet = facet.cloneNode(true);
 
-    const checkbox = newFacet.querySelector('input[type=checkbox]');
-    checkbox.checked = false;
-    checkbox.id = `facet-${(+new Date).toString(36).slice(-5)}-optional`;
-    checkbox.nextElementSibling.htmlFor = checkbox.id;
-
-    const text = newFacet.querySelector('input[type=text]');
-    text.value = "";
-
+    this.resetFacet(newFacet);
     facet.parentElement.append(newFacet);
   }
 
@@ -28,15 +21,30 @@ class SearchForm {
         this.addFacet();
         break;
       case "remove-facet":
-        this.removeFacet(target);
+        this.removeOrResetFacet(target);
         break;
     }
   }
 
-  removeFacet(button) {
+  removeOrResetFacet(button) {
+    const facet = button.closest(".facet");
+
     if (this.element.querySelectorAll(".remove-facet").length > 1) {
-      button.closest(".facet").remove();
+      facet.remove();
+      return;
     }
+
+    this.resetFacet(facet);
+  }
+
+  resetFacet(facet) {
+    facet.querySelector('select').selectedIndex = 0;
+    facet.querySelector('input[type=text]').value = "";
+
+    const checkbox = facet.querySelector('input[type=checkbox]');
+    checkbox.checked = false;
+    checkbox.id = `facet-${(+new Date).toString(36).slice(-5)}-optional`;
+    checkbox.nextElementSibling.htmlFor = checkbox.id;
   }
 }
 
