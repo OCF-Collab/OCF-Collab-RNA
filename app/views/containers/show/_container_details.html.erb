@@ -11,18 +11,22 @@
 
   <div id="container-actions" class="actions">
     <div class="btn-group" role="group" title="Transforming competency container might take from 30 seconds to several minutes">
-      <a href="<%= download_container_url(container_metadata.id) %>" class="btn btn-info export-button">
-        <div class="spinner-border spinner-border-sm" role="status"></div>
-        <span>Export as <%= container_metamodel[:label] %></span>
-      </a>
-      <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span class="sr-only">Select metamodel</span>
+      <%= link_to download_container_url(container_metadata.id), class: "btn btn-info export-button", target: "_blank" do %>
+        <div class="export-spinner spinner-border spinner-border-sm" role="status"></div>
+        <span class="export-label">
+          Export as <%= container_metamodel[:label] %>
+        </span>
+      <% end %>
+      <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+        <span class="visually-hidden">Select metamodel</span>
       </button>
-      <div class="dropdown-menu">
-        <% (available_metamodels - [container_metamodel]).each do |metamodel| %>
-          <a href="<%= download_container_url(container_metadata.id, metamodel: metamodel[:concept_url]) %>" class="dropdown-item"><%= metamodel[:label] %></a>
-        <% end %>
-      </div>
+      <ul class="dropdown-menu">
+      <% (available_metamodels - [container_metamodel]).each do |metamodel| %>
+        <li>
+          <%= link_to metamodel[:label], download_container_url(container_metadata.id, metamodel: metamodel[:concept_url]), class: "dropdown-item", target: "_blank" %>
+        </li>
+      <% end %>
+      </ul>
     </div>
   </div>
 </div>

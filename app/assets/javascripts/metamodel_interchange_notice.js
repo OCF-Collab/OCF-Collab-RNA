@@ -14,7 +14,10 @@ class MetamodelInterchangeNotice {
   }
 
   initTooltip() {
-    this.tooltip = new Tooltip(this.tooltipElement(), this.tooltipOptions());
+    this.tooltip = new bootstrap.Tooltip(
+      this.tooltipElement(),
+      this.tooltipOptions()
+    );
   }
 
   tooltipElement() {
@@ -35,13 +38,28 @@ class MetamodelInterchangeNotice {
   }
 
   interchangeElements() {
-    return this.actionsElement.querySelectorAll(".dropdown-item");
+    return this.actionsElement.querySelectorAll("a");
   }
 
-  handleInterchangeClick(event) {
+  async handleInterchangeClick(event) {
+    event.preventDefault();
+
     this.showTooltip();
-    this.showSpinner();
-    this.disableButtons();
+    this.toggleExportAvailability();
+
+    const response = await fetch(event.target.closest("a").href);
+    const blob = await response.blob();
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.download = /filename="([^"]+)/.exec(response.headers.get("Content-Disposition"))[1];
+    link.href = url;
+    link.style.display = "none";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+
+    this.toggleExportAvailability();
   }
 
   showTooltip() {
@@ -53,15 +71,20 @@ class MetamodelInterchangeNotice {
     this.tooltip.hide();
   }
 
-  showSpinner() {
-    this.tooltipElement().querySelector(".spinner-border").style.opacity = 1;
-    this.tooltipElement().querySelector("span").style.opacity = 0;
-  }
+  toggleExportAvailability() {
+    ["export-spinner", "export-label"].forEach(item => {
+      const element = this.tooltipElement().querySelector(`.${item}`);
+      element.style.opacity = 1 - getComputedStyle(element).getPropertyValue("opacity");
+    });
 
-  disableButtons() {
-    this.actionsElement.querySelectorAll(".btn").forEach((btn) => {
-      btn.classList.add("disabled");
+    this.actionsElement.querySelectorAll(".btn, a").forEach(item => {
+      const { classList } = item;
 
+      if (classList.contains("disabled")) {
+        classList.remove("disabled");
+      } else {
+        classList.add("disabled");
+      }
     });
   }
 }
