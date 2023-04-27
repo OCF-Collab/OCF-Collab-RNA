@@ -1,12 +1,18 @@
+<% if @global_search %>
 <h5 class="mb-3">
   Found <%= number_with_delimiter search.competencies_count %> competencies in <%= number_with_delimiter search.containers_count %> containers
 </h5>
+<% else %>
+<div class="alert alert-warning">
+  Showing results for a specific container. To search across all containers, click <%= link_to "here", root_path %>.
+</div>
+<% end %>
 
 <ul class="list-unstyled" id="search-results">
-  <%= render partial: "container", collection: search.results, as: :container %>
+  <%= render partial: "container", collection: @search_results, as: :container %>
 </ul>
 
-<% if search.has_pages? %>
+<% if search.has_pages? && @global_search %>
 <div class="row justify-content-between">
   <div class="col-md-auto">
     <%= link_to(

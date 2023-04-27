@@ -1,10 +1,12 @@
 class Search
   SEARCH_PATH = "/search"
+  PER_CONTAINER = 20
   PER_PAGE = 10
 
-  attr_reader :container_type, :facets, :tenant
+  attr_reader :container_id, :container_type, :facets, :tenant
 
-  def initialize(container_type:, facets:, page: 1, tenant:)
+  def initialize(container_id:, container_type:, facets:, page: 1, tenant:)
+    @container_id = container_id
     @container_type = container_type
     @facets = facets
     @page = page
@@ -76,6 +78,13 @@ class Search
   end
 
   def params
-    { container_type:, facets:, page:, per_page: PER_PAGE }
+    {
+      container_id:,
+      container_type:,
+      facets:,
+      page:,
+      per_container: PER_CONTAINER,
+      per_page: PER_PAGE
+    }
   end
 end
