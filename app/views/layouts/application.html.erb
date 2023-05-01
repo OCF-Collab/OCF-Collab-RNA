@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="h-100">
   <head>
     <title><%= yield(:title) %> | OCF Collab</title>
 
@@ -10,10 +10,21 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
   </head>
 
-  <body class="bg-light">
-    <%= render "shared/navbar" %>
-    <div class="container-fluid my-3">
-      <%= yield %>
-    </div>
+  <body class="bg-light d-flex flex-column h-100">
+    <header>
+      <%= render "shared/navbar" %>
+    </header>
+
+    <main class="flex-shrink-0">
+      <div class="container-fluid my-3">
+        <%= yield %>
+      </div>
+    </main>
+
+    <footer class="bg-dark mt-auto py-3 text-light">
+      <div class="text-center">
+        © The U.S. Chamber of Commerce Foundation, 2020–<%= Date.current.year %>
+      </div>
+    </footer>
   </body>
 </html>
