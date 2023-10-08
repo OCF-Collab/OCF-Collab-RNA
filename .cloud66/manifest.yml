@@ -3,7 +3,7 @@ default: &default
     configuration:
       node_version: 18.8.0
       operating_system: ubuntu2004
-      ruby_version: 3.2.1
+      ruby_version: 3.2.2
 
 production:
   <<: *default
