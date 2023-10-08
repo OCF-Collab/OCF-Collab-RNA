@@ -1,8 +1,8 @@
 <nav class="navbar navbar-dark bg-dark">
   <div class="container-fluid">
-    <a href="/" class="navbar-brand">
-      <%= image_tag "USChamberFoundation-Logo.svg", height: 50 %>
+    <%= link_to root_path, class: "navbar-brand" do %>
+      <%= image_tag "logo.png" %>
       | Open Competencies Network
-    </a>
+    <% end %>
   </div>
 </nav>
