@@ -8,5 +8,5 @@ en:
       search_form:
         container_type:
           all: All containers
-          collections: Collections
-          frameworks: Frameworks
+          collection: Collections
+          framework: Frameworks

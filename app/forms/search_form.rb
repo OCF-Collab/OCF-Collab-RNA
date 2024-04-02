@@ -1,8 +1,8 @@
 class SearchForm < ApplicationForm
   CONTAINER_TYPES = {
     'all' => nil,
-    'frameworks' => 'Framework',
-    'collections' => 'Collection'
+    'framework' => 'framework',
+    'collection' => 'collection'
   }.freeze
 
   FACETS = {
