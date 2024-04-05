@@ -8,19 +8,15 @@ class SearchController < ApplicationController
 
     @global_search = params[:container_id].blank?
 
-    if @form.valid?
-      @search = Search.new(
-        **@form.to_params,
-        container_id: params[:container_id],
-        page: params[:page],
-        tenant: current_tenant
-      )
+    @search = Search.new(
+      **@form.to_params,
+      container_id: params[:container_id],
+      page: params[:page],
+      tenant: current_tenant
+    )
 
-      @search_results = @search.results.map do |result|
-        SearchResultParser.new(result:).search_result
-      end
-    else
-      @error = "Please enter at least one non-optional term to perform a search"
+    @search_results = @search.results.map do |result|
+      SearchResultParser.new(result:).search_result
     end
   end
 end

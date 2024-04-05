@@ -25,9 +25,11 @@
             <% end %>
           </div>
 
+          <% if competency.hit_score %>
           <span class="badge bg-success font-monospace rounded-pill" title="Hit score">
             <%= number_with_precision(competency.hit_score, precision: 2) %>
           </span>
+          <% end %>
         </li>
       <% end %>
     </ol>

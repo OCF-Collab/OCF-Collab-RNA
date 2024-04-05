@@ -42,10 +42,6 @@ class SearchForm < ApplicationForm
     }
   end
 
-  def valid?
-    facets.any? { |f| !f.optional && f.value? }
-  end
-
   class Facet < ApplicationForm
     attr_reader :id, :key, :optional, :value
 
