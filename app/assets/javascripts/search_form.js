@@ -1,12 +1,12 @@
 class SearchForm {
-  constructor(element) {
+  constructor(formElement) {
     this.click = this.click.bind(this);
-    this.element = element;
-    this.element.addEventListener("click", this.click);
+    this.formElement = formElement;
+    this.formElement.addEventListener("click", this.click);
   }
 
   addFacet() {
-    const facet = this.element.querySelector(".facet");
+    const facet = this.formElement.querySelector(".facet");
     const newFacet = facet.cloneNode(true);
 
     this.resetFacet(newFacet);
@@ -29,12 +29,13 @@ class SearchForm {
   removeOrResetFacet(button) {
     const facet = button.closest(".facet");
 
-    if (this.element.querySelectorAll(".remove-facet").length > 1) {
+    if (this.formElement.querySelectorAll(".remove-facet").length > 1) {
       facet.remove();
-      return;
+    } else {
+      this.resetFacet(facet);
     }
 
-    this.resetFacet(facet);
+    this.formElement.submit();
   }
 
   resetFacet(facet) {
