@@ -26,7 +26,7 @@ module Metamodels
       end
 
       def root_competency_ids
-        container_data["ceasn:hasTopChild"]
+        container_data["ceasn:hasTopChild"] || container_data["ceterms:hasMember"]
       end
 
       def container_data
