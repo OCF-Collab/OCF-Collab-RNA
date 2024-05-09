@@ -15,8 +15,8 @@ module Metamodels
 
       def container_attributes
         {
-          title: attr_lang_value("name"),
-          description: attr_lang_value("description"),
+          title: attr_lang_value("name") || attr_lang_value("name", "ceterms"),
+          description: attr_lang_value("description") || attr_lang_value("description", "ceterms"),
           cirruculum_subject: nil,
           education_level: attr_value("educationLevelType"),
           language: attr_value("inLanguage"),
@@ -42,12 +42,10 @@ module Metamodels
         }
       end
 
-      def attr_lang_value(key)
-        if attr_value(key).blank?
-          return nil
-        end
+      def attr_lang_value(key, prefix = "ceasn")
+        return if attr_value(key, prefix).blank?
 
-        attr_value(key).values.first
+        attr_value(key, prefix).values.first
       end
 
       def attr_value(key, prefix = "ceasn")
