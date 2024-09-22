@@ -7,7 +7,7 @@
     </h6>
 
     <% if competency.fetch("external_id") %>
-    <%= link_to competency.fetch("competency_text"), competency_path(id: competency.fetch("external_id")), target: "blank" %>
+    <%= link_to competency.fetch("competency_text"), competency.fetch("html_url").presence || competency_path(id: competency.fetch("external_id")), target: "blank" %>
     <% else %>
     <%= competency.fetch("competency_text") %>
     <% end %>

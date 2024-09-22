@@ -16,6 +16,7 @@ class ContainerMetadataParser
       provider_meta_model: body["providerMetaModel"],
       registry_rights: body["registryRights"],
       beneficiary_rights: body["beneficiaryRights"],
+      html_url: body["htmlUrl"]
     )
   end
 end

@@ -69,6 +69,10 @@ CONTAINER_ATTRIBUTES = [
     key: :date_added,
     label: "Date Added",
   },
+  {
+    key: :html_url,
+    label: "HTML URL",
+  },
 ]
 
 Container = Struct.new(

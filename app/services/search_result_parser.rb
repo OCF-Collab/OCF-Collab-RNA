@@ -20,7 +20,8 @@ class SearchResultParser
       CompetencySearchResult.new(
         competency_text: competency.fetch("competency_text"),
         external_id: competency.fetch("external_id"),
-        hit_score: competency.fetch("hit_score")
+        hit_score: competency.fetch("hit_score"),
+        html_url: competency.fetch("html_url")
       )
     end
   end

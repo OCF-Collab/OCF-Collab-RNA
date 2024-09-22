@@ -3,7 +3,7 @@
     <%= image_tag container.attribution_logo_url, alt: container.attribution_name, class: "float-end", width: "75px" %>
 
     <h5 class="card-title me-5">
-      <%= link_to container.title, container_path(id: container.id), class: "link-offset-2", target: "_blank" %>
+      <%= link_to container.title, container.html_url.presence || container_path(id: container.id), class: "link-offset-2", target: "_blank" %>
     </h5>
 
     <% if container.description.present? %>
@@ -19,7 +19,7 @@
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class="ms-2 me-auto">
             <% if competency.external_id %>
-            <%= link_to competency.competency_text, competency_path(id: competency.external_id), class: "link-offset-2", target: "blank" %>
+            <%= link_to competency.competency_text, competency.html_url.presence || competency_path(id: competency.external_id), class: "link-offset-2", target: "blank" %>
             <% else %>
             <%= competency.competency_text %>
             <% end %>

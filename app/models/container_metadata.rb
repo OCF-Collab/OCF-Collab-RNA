@@ -8,6 +8,7 @@ ContainerMetadata = Struct.new(
   :provider_meta_model,
   :registry_rights,
   :beneficiary_rights,
+  :html_url,
   keyword_init: true,
 ) do
 end

@@ -5,6 +5,7 @@ ContainerSearchResult = Struct.new(
   :beneficiary_rights,
   :competencies,
   :description,
+  :html_url,
   :id,
   :provider_meta_model,
   :registry_rights,
