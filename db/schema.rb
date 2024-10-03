@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_03_174134) do
-
+ActiveRecord::Schema[7.1].define(version: 2020_12_03_174134) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -20,8 +19,8 @@ ActiveRecord::Schema.define(version: 2020_12_03_174134) do
     t.uuid "tenant_id", null: false
     t.string "token", null: false
     t.boolean "active", default: false, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["tenant_id"], name: "index_tenant_tokens_on_tenant_id"
     t.index ["token"], name: "index_tenant_tokens_on_token", unique: true
   end
@@ -30,8 +29,8 @@ ActiveRecord::Schema.define(version: 2020_12_03_174134) do
     t.string "name", null: false
     t.string "oauth_client_id", null: false
     t.string "oauth_client_secret", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean "default", default: false, null: false
     t.index ["oauth_client_id"], name: "index_tenants_on_oauth_client_id", unique: true
   end

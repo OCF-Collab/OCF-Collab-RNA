@@ -1,5 +1,5 @@
 
-FROM ruby:3.2.2
+FROM ruby:3.3.5
 
 ENV APP_PATH /app/
 ENV GEM_HOME="/usr/local/bundle"
