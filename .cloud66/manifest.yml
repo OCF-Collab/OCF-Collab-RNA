@@ -1,9 +1,12 @@
 default: &default
+  postgresql:
+    configuration:
+      version: 16.4
   rails:
     configuration:
       node_version: 18.8.0
-      operating_system: ubuntu2004
-      ruby_version: 3.2.2
+      operating_system: ubuntu2204
+      ruby_version: 3.3.5
 
 production:
   <<: *default
